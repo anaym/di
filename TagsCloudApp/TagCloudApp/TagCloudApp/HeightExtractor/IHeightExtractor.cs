@@ -1,8 +1,4 @@
-﻿using System.Drawing;
-using Utility.Geometry.Extensions;
-using Size = Utility.Geometry.Size;
-
-namespace TagCloudApp.SizeExtractor
+﻿namespace TagCloudApp.HeightExtractor
 {
     public interface IHeightExtractor
     {

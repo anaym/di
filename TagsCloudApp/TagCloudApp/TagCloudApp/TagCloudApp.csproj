@@ -49,19 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomaticTagLayoutTask.cs" />
     <Compile Include="HeightExtractor\EqualHeightExtractor.cs" />
     <Compile Include="HeightExtractor\IHeightExtractor.cs" />
+    <Compile Include="HeightExtractor\ScaledHeightExtractor.cs" />
     <Compile Include="IO\IImageDestination.cs" />
+    <Compile Include="IO\TestPngImageDestination.cs" />
+    <Compile Include="ITagLayoutTask.cs" />
     <Compile Include="Layouter\ISizeLayouter.cs" />
     <Compile Include="Layouter\ITagLayouter.cs" />
+    <Compile Include="Layouter\SizeCircularLayouter.cs" />
+    <Compile Include="Layouter\TagLayouter.cs" />
+    <Compile Include="SizeExtractor\GraphicSizeExtractor.cs" />
     <Compile Include="SizeExtractor\ISizeExtractor.cs" />
     <Compile Include="IO\IWordsSource.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\TestWordSource.cs" />
     <Compile Include="TagCloudRender\ITagCloudRenderer.cs" />
-    <Compile Include="WordToTag\IWordsToTag.cs" />
-    <Compile Include="WordToTag\TestWordsToTag.cs" />
+    <Compile Include="TagCloudRender\TagCloudRenderer.cs" />
+    <Compile Include="WordToTag\AllTagFilter.cs" />
+    <Compile Include="WordToTag\ITagExtractor.cs" />
+    <Compile Include="WordToTag\ITagFilter.cs" />
+    <Compile Include="WordToTag\EqualTagExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
