@@ -5,6 +5,7 @@ namespace FractalPainting.Infrastructure
 		string Category { get; }
 		string Name { get; }
 		string Description { get; }
+        double Index { get; }
 		void Perform();
 	}
 }

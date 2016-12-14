@@ -4,31 +4,29 @@ using FractalPainting.Infrastructure;
 
 namespace FractalPainting.App.Actions
 {
-	public class SaveImageAction : IUiAction, INeed<IImageDirectoryProvider>, INeed<IImageHolder>
+	public class SaveImageAction : IUiAction
 	{
-		private IImageDirectoryProvider imageDirectoryProvider;
-		private IImageHolder imageHolder;
+		private readonly string savePath;
+		private readonly IImageHolder imageHolder;
 
-		public void SetDependency(IImageDirectoryProvider dependency)
-		{
-			imageDirectoryProvider = dependency;
-		}
+	    public SaveImageAction(string savePath, IImageHolder imageHolder)
+	    {
+	        this.savePath = savePath;
+	        this.imageHolder = imageHolder;
+	    }
 
-		public void SetDependency(IImageHolder dependency)
-		{
-			imageHolder = dependency;
-		}
 
-		public string Category => "Файл";
+	    public string Category => "Файл";
 		public string Name => "Сохранить...";
 		public string Description => "Сохранить изображение в файл";
+	    public double Index => 0;
 
-		public void Perform()
+	    public void Perform()
 		{
 			var dialog = new SaveFileDialog
 			{
 				CheckFileExists = false,
-				InitialDirectory = Path.GetFullPath(imageDirectoryProvider.ImagesDirectory),
+				InitialDirectory = Path.GetFullPath(savePath),
                 DefaultExt = "bmp",
                 FileName = "image.bmp",
                 Filter = "Изображения (*.bmp)|*.bmp" 

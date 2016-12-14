@@ -8,7 +8,11 @@ namespace FractalPainting.Infrastructure
 	{
 		public static ToolStripItem[] ToMenuItems(this IUiAction[] actions)
 		{
-			var items = actions.GroupBy(a => a.Category)
+			var items = actions
+                .OrderBy(a => a.Index)
+                .ThenBy(a => a.Category)
+                .GroupBy(a => a.Category)
+                .OrderBy(g => g.First().Index)
 				.Select(g => CreateToplevelMenuItem(g.Key, g.ToList()))
 				.Cast<ToolStripItem>()
 				.ToArray();
@@ -21,14 +25,14 @@ namespace FractalPainting.Infrastructure
 			return new ToolStripMenuItem(name, null, menuItems);
 		}
 
-		public static ToolStripItem ToMenuItem(this IUiAction action)
-		{
-			return
-				new ToolStripMenuItem(action.Name, null, (sender, args) => action.Perform())
-				{
-					ToolTipText = action.Description,
-					Tag = action
-				};
-		}
+	    public static ToolStripItem ToMenuItem(this IUiAction action)
+	    {
+	        return
+	            new ToolStripMenuItem(action.Name, null, (sender, args) => action.Perform())
+	            {
+	                ToolTipText = action.Description,
+	                Tag = action
+	            };
+	    }
 	}
 }
