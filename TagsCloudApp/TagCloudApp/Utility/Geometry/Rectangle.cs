@@ -57,6 +57,11 @@ namespace Utility.Geometry
             return Contains(other.LeftTop, true) && Contains(other.RightBottom, true);
         }
 
+        public static Rectangle operator*(Rectangle r, int s)
+        {
+            return new Rectangle(r.Right*s, r.Top*s, r.Left*s, r.Bottom*s);
+        }
+
         public bool Equals(Rectangle other) => Size.Equals(other.Size) && RightTop.Equals(other.RightTop);
         public override int GetHashCode() => LazyHash.GetHashCode(LeftTop, Size);
         public override bool Equals(object obj) => obj is Rectangle && Equals((Rectangle)obj);

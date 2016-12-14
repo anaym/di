@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Autofac;
 using Autofac.Core;
+using TagCloudApp.App;
+using TagCloudApp.App.GUI;
+using TagCloudApp.App.GUI.Actions;
 using TagCloudApp.HeightExtractor;
 using TagCloudApp.IO;
 using TagCloudApp.Layouter;
 using TagCloudApp.SizeExtractor;
 using TagCloudApp.TagCloudRender;
 using TagCloudApp.WordToTag;
+using Rectangle = Utility.Geometry.Rectangle;
 
 namespace TagCloudApp
 {
@@ -29,20 +36,15 @@ namespace TagCloudApp
             builder.RegisterType<SizeCircularLayouter>().As<ISizeLayouter>();
             builder.RegisterType<TagLayouter>().As<ITagLayouter>();
             builder.RegisterType<TagCloudRenderer>().As<ITagCloudRenderer>();
+            builder.RegisterType<GuiApplication>().As<IApplication>();
+            builder.RegisterType<RenderSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
+            builder.RegisterType<Dictionary<string, Rectangle>>().AsSelf().SingleInstance();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
 
-            try
-            {
-                var container = builder.Build();
-                var task = container.Resolve<ITagLayoutTask>();
-                var destination = container.Resolve<IImageDestination>();
-                var bitmap = task.Solve();
-                destination.Save(bitmap);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex.InnerException;
-            }
+
+            var container = builder.Build();
+            container.Resolve<IApplication>().Run();
         }
     }
 }

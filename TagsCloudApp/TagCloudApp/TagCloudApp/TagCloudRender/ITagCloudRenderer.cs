@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using Size = Utility.Geometry.Size;
 using Rectangle = Utility.Geometry.Rectangle;
 
@@ -16,7 +17,7 @@ namespace TagCloudApp.TagCloudRender
         public static Bitmap Render(this ITagCloudRenderer renderer, IReadOnlyDictionary<string, Rectangle> tags)
         {
             var size = renderer.GetCoverageRectangle(tags);
-            var bitmap = new Bitmap(size.Size.Width, size.Size.Height);
+            var bitmap = new Bitmap(size.Size.Width, size.Size.Height, PixelFormat.Format24bppRgb);
             renderer.Render(Graphics.FromImage(bitmap), tags);
             return bitmap;
         }

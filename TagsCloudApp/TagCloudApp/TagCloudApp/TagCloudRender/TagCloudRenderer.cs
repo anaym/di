@@ -12,17 +12,12 @@ namespace TagCloudApp.TagCloudRender
 {
     public class TagCloudRenderer : ITagCloudRenderer
     {
-        private readonly List<Brush> textBrushes;
-        private readonly bool showRectangles;
         private readonly StringFormat stringFormat;
+        private readonly RenderSettings settings;
 
-        public void AddColor(Color color) => textBrushes.Add(new SolidBrush(color));
-        public void AddManyColors(params Color[] colors) => textBrushes.AddRange(colors.Select(c => new SolidBrush(c)));
-
-        public TagCloudRenderer(bool showRectangles = false)
+        public TagCloudRenderer(RenderSettings settings)
         {
-            textBrushes = new List<Brush> { new SolidBrush(Color.DarkRed) };
-            this.showRectangles = showRectangles;
+            this.settings = settings;
             stringFormat = new StringFormat
             {
                 Alignment = StringAlignment.Near,
@@ -32,29 +27,31 @@ namespace TagCloudApp.TagCloudRender
 
         public Rectangle GetCoverageRectangle(IReadOnlyDictionary<string, Rectangle> tags)
         {
-            return tags.Values.CoveringRectangle();
+            return tags.Values.CoveringRectangle() * settings.Scale;
         }
 
         public void Render(Graphics graphics, IReadOnlyDictionary<string, Rectangle> tags)
         {
             var transform = new VectorCoordinateSystemConverter(GetCoverageRectangle(tags));
-            if (showRectangles)
+            var s = settings.Scale;
+            if (settings.ShowRectangles)
             {
                 foreach (var rectangle in tags.Values)
                 {
-                    var rectF = transform.Transform(rectangle);
+                    var rectF = transform.Transform(rectangle*s);
                     graphics.FillRectangle(new SolidBrush(rectangle.Size.ToColor()), rectF);
                     graphics.DrawRectangle(new Pen(Color.GreenYellow), rectF.X, rectF.Y, rectF.Width, rectF.Height);
 
                 }
             }
             var rnd = new Random();
+            var textBrushes = new[] {new SolidBrush(settings.TextColor),};
             foreach (var tag in tags)
             {
-                var rectF = transform.Transform(tag.Value);
+                var rectF = transform.Transform(tag.Value*s);
                 graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 var goodFont = FindFont(graphics, tag.Key, rectF.Size, new Font(FontFamily.GenericMonospace, 128));
-                var textBrush = textBrushes[rnd.Next(textBrushes.Count)];
+                var textBrush = textBrushes[rnd.Next(textBrushes.Length)];
                 graphics.DrawString(tag.Key, goodFont, textBrush, rectF, stringFormat);
             }
         }
