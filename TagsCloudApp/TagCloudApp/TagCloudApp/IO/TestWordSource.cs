@@ -6,7 +6,7 @@ namespace TagCloudApp.IO
     {
         public IEnumerable<string> GetWords()
         {
-            return new[] {"a", "b", "a", "c", "d"};
+            return new[] {"a", "b", "a", "c", "d", "D"};
         }
     }
 }

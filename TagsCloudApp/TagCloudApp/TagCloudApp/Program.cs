@@ -21,7 +21,7 @@ namespace TagCloudApp
             var builder = new ContainerBuilder();
             builder.RegisterType<TestWordSource>().As<IWordsSource>();
             builder.RegisterType<TestPngImageDestination>().As<IImageDestination>();
-            builder.RegisterType<EqualTagExtractor>().As<ITagExtractor>();
+            builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
             builder.RegisterType<AutomaticTagLayoutTask>().As<ITagLayoutTask>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();
             builder.RegisterType<ScaledHeightExtractor>().As<IHeightExtractor>();

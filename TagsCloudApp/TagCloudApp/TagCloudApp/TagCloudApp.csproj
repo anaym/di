@@ -72,6 +72,7 @@
     <Compile Include="WordToTag\ITagExtractor.cs" />
     <Compile Include="WordToTag\ITagFilter.cs" />
     <Compile Include="WordToTag\EqualTagExtractor.cs" />
+    <Compile Include="WordToTag\LowCaseTagExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
