@@ -45,13 +45,13 @@ namespace TagCloudApp.TagCloudRender
                 }
             }
             var rnd = new Random();
-            var textBrushes = new[] {new SolidBrush(settings.TextColor),};
+            var textBrushes = settings.TextColors.Select(c => new SolidBrush(c)).ToList();
             foreach (var tag in tags)
             {
                 var rectF = transform.Transform(tag.Value*s);
                 graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 var goodFont = FindFont(graphics, tag.Key, rectF.Size, new Font(FontFamily.GenericMonospace, 128));
-                var textBrush = textBrushes[rnd.Next(textBrushes.Length)];
+                var textBrush = textBrushes[rnd.Next(textBrushes.Count)];
                 graphics.DrawString(tag.Key, goodFont, textBrush, rectF, stringFormat);
             }
         }
