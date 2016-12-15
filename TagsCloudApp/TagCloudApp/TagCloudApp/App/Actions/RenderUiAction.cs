@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows.Forms;
 using TagCloud.Core.Task;
-using TagCloudApp.Task;
-using Rectangle = Utility.Geometry.Rectangle;
 
-namespace TagCloudApp.App.GUI.Actions
+namespace TagCloudApp.App.Actions
 {
     public class RenderUiAction : IUiAction
     {

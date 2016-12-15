@@ -1,7 +1,7 @@
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace TagCloudApp.App.GUI.Actions
+namespace TagCloudApp.App.Actions
 {
     public class SaveImageUiAction : IUiAction
     {
@@ -18,7 +18,11 @@ namespace TagCloudApp.App.GUI.Actions
         public double Index => 0;
         public void Perform(IApplication app)
         {
-            pictureBox.Image?.Save("s.png", ImageFormat.Png);
+            var path = app.RequestSavePath("out.png", ".png");
+            if (path != null)
+            {
+                pictureBox.Image?.Save(path, ImageFormat.Png);
+            }
         }
     }
 }

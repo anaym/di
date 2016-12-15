@@ -53,16 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\GUI\Actions\IUiAction.cs" />
-    <Compile Include="App\GUI\Actions\RenderSettingsUiAction.cs" />
-    <Compile Include="App\GUI\Actions\RenderUiAction.cs" />
-    <Compile Include="App\GUI\Actions\SaveImageUiAction.cs" />
-    <Compile Include="App\GUI\Actions\WordsLoadUiAction.cs" />
+    <Compile Include="App\Actions\IUiAction.cs" />
+    <Compile Include="App\Actions\RenderSettingsUiAction.cs" />
+    <Compile Include="App\Actions\RenderUiAction.cs" />
+    <Compile Include="App\Actions\SaveImageUiAction.cs" />
+    <Compile Include="App\Actions\WordsLoadUiAction.cs" />
     <Compile Include="App\GUI\SettingsForm.cs" />
-    <Compile Include="App\GUI\Actions\UiActionExtensions.cs" />
+    <Compile Include="App\GUI\GuiActionExtensions.cs" />
     <Compile Include="App\GUI\GuiApplication.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="App\TUI\TuiApplication.cs" />
+    <Compile Include="App\TUI\TuiEngine.cs" />
     <Compile Include="Layouter\EqualHeightExtractor.cs" />
     <Compile Include="Layouter\ScaledHeightExtractor.cs" />
     <Compile Include="App\IApplication.cs" />

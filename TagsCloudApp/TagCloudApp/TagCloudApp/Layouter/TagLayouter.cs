@@ -8,13 +8,11 @@ namespace TagCloudApp.Layouter
     {
         private readonly ISizeLayouter sizeLayouter;
         private readonly ISizeExtractor sizeExtractor;
-        private readonly Dictionary<string, Rectangle> tags;
 
         public TagLayouter(ISizeLayouter sizeLayouter, ISizeExtractor sizeExtractor)
         {
             this.sizeLayouter = sizeLayouter;
             this.sizeExtractor = sizeExtractor;
-            tags = new Dictionary<string, Rectangle>();
         }
 
         public Rectangle PutNextTag(string tag, int frequence)

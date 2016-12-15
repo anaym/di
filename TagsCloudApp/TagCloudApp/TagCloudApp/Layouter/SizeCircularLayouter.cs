@@ -47,12 +47,6 @@ namespace TagCloudApp.Layouter
 
             return rect;
         }
-
-        public IReadOnlyDictionary<Size, Rectangle> GetRectangles()
-        {
-            throw new NotImplementedException();
-        }
-
         private Rectangle TryInsert(Size size)
         {
             var rect = spots

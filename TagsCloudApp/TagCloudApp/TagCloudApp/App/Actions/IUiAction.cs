@@ -1,4 +1,4 @@
-namespace TagCloudApp.App.GUI.Actions
+namespace TagCloudApp.App.Actions
 {
 	public interface IUiAction
 	{

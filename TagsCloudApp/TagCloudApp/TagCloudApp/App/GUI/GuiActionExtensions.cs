@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TagCloudApp.App.Actions;
 
-namespace TagCloudApp.App.GUI.Actions
+namespace TagCloudApp.App.GUI
 {
-	public static class UiActionExtensions
+	public static class GuiActionExtensions
 	{
 		public static ToolStripItem[] ToMenuItems(this IUiAction[] actions, IApplication app)
 		{

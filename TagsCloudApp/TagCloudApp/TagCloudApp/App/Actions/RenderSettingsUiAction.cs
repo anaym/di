@@ -1,6 +1,6 @@
 using TagCloudApp.Renderer;
 
-namespace TagCloudApp.App.GUI.Actions
+namespace TagCloudApp.App.Actions
 {
     public class RenderSettingsUiAction : IUiAction
     {
@@ -17,7 +17,7 @@ namespace TagCloudApp.App.GUI.Actions
         public double Index => 1;
         public void Perform(IApplication app)
         {
-            SettingsForm.For(settings).ShowDialog();
+            app.Request(settings);
         }
     }
 }

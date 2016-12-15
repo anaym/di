@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
 using TagCloud.Core.Layouter;
 using TagCloud.Core.Renderer;
 using TagCloud.Core.Source;
 using TagCloud.Core.Task;
 using TagCloudApp.App;
+using TagCloudApp.App.Actions;
 using TagCloudApp.App.GUI;
-using TagCloudApp.App.GUI.Actions;
+using TagCloudApp.App.TUI;
 using TagCloudApp.Layouter;
 using TagCloudApp.Renderer;
 using TagCloudApp.Source;
 using TagCloudApp.Task;
 using Module = Autofac.Module;
-using Rectangle = Utility.Geometry.Rectangle;
 
 namespace TagCloudApp
 {
