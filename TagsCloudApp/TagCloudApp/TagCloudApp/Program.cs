@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Autofac;
+using Autofac.Builder;
 using Autofac.Core;
 using TagCloudApp.App;
 using TagCloudApp.App.GUI;
@@ -27,11 +28,11 @@ namespace TagCloudApp
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<TestWordSource>().As<IWordsSource>();
+            builder.RegisterType<FileWordsSource>().As<IWordsSource>();
             builder.RegisterType<FileWordsSourceSettings>().AsSelf().SingleInstance();
             builder.RegisterType<TestPngImageDestination>().As<IImageDestination>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
-            builder.RegisterType<AutomaticTagLayoutTask>().As<ITagLayoutTask>();
+            builder.RegisterType<TagLayoutTask>().As<ITagLayoutTask>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();
             builder.RegisterType<ScaledHeightExtractor>().As<IHeightExtractor>();
             builder.RegisterType<GraphicSizeExtractor>().As<ISizeExtractor>();
@@ -41,7 +42,7 @@ namespace TagCloudApp
             builder.RegisterType<GuiApplication>().As<IApplication>();
             builder.RegisterType<RenderSettings>().AsSelf().SingleInstance();
             builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
-            builder.RegisterType<Dictionary<string, Rectangle>>().AsSelf().SingleInstance();
+            builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
 
 

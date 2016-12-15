@@ -12,12 +12,14 @@ namespace TagCloudApp.App.GUI
     public class GuiApplication : Form, IApplication
     {
 
-        public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RenderSettings renderSettings, Dictionary<string, Rectangle> data)
+        public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RenderSettings renderSettings, TagCollection collection)
         {
             var mainMenu = new MenuStrip();
             mainMenu.Items.AddRange(actions.ToMenuItems(this));
+            mainMenu.Dock = DockStyle.Bottom;
             Controls.Add(mainMenu);
-            data.Add("A", new Rectangle(0, 0, 1200, 120));
+            collection.AddWord("Abacaba", 10);
+            collection.AddWord("V-vasya", 5);
 
             pictureBox.Dock = DockStyle.Fill;
             Controls.Add(pictureBox);

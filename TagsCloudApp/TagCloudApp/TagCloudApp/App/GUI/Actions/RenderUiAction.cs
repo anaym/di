@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,14 +11,12 @@ namespace TagCloudApp.App.GUI.Actions
 {
     public class RenderUiAction : IUiAction
     {
-        private readonly Dictionary<string, Rectangle> data;
-        private readonly ITagCloudRenderer renderer;
+        private readonly Func<ITagLayoutTask> taskFactory;
         private readonly PictureBox pictureBox;
 
-        public RenderUiAction(Dictionary<string, Rectangle> data, ITagCloudRenderer renderer, PictureBox pictureBox)
+        public RenderUiAction(Func<ITagLayoutTask> taskFactory, PictureBox pictureBox)
         {
-            this.data = data;
-            this.renderer = renderer;
+            this.taskFactory = taskFactory;
             this.pictureBox = pictureBox;
         }
 
@@ -27,7 +26,7 @@ namespace TagCloudApp.App.GUI.Actions
         public double Index => 1.5;
         public void Perform(IApplication app)
         {
-            var bitmap = renderer.Render(data);
+            var bitmap = taskFactory().Solve();
             pictureBox.Image = bitmap;
             if (bitmap != null)
             {

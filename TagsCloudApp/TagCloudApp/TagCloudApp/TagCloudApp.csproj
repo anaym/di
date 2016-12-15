@@ -85,6 +85,8 @@
     <Compile Include="TagCloudRender\ITagCloudRenderer.cs" />
     <Compile Include="TagCloudRender\RenderSettings.cs" />
     <Compile Include="TagCloudRender\TagCloudRenderer.cs" />
+    <Compile Include="TagCollection.cs" />
+    <Compile Include="TagLayoutTask.cs" />
     <Compile Include="WordToTag\AllTagFilter.cs" />
     <Compile Include="WordToTag\ITagExtractor.cs" />
     <Compile Include="WordToTag\ITagFilter.cs" />

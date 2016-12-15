@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TagCloudApp.IO;
+using TagCloudApp.Layouter;
+using TagCloudApp.WordToTag;
 
 namespace TagCloudApp.App.GUI.Actions
 {
-    public class WordsLoadUiAction : IUiAction
+    public class DataLoadUiAction : IUiAction
     {
         private readonly FileWordsSourceSettings settings;
         private readonly IWordsSource source;
-        private readonly TagCollection collection;
+        private readonly TagCollection frequences;
 
-        public WordsLoadUiAction(FileWordsSourceSettings settings, IWordsSource source, TagCollection collection)
+        public DataLoadUiAction(FileWordsSourceSettings settings, IWordsSource source, TagCollection frequences)
         {
             this.settings = settings;
             this.source = source;
-            this.collection = collection;
+            this.frequences = frequences;
         }
 
         public string Category => "File";
@@ -30,8 +31,9 @@ namespace TagCloudApp.App.GUI.Actions
             if (pathes != null && pathes.Length > 0)
             {
                 settings.FileName = pathes.First();
-                collection.Clear();
-                collection.AddAnyWords(source.GetWords().ToList());
+                frequences.Clear();
+                frequences.AddAnyWords(source.GetWords());
+                app.Rerender();
             }
         }
     }

@@ -47,6 +47,11 @@ namespace TagCloudApp.Layouter
             return rect;
         }
 
+        public IReadOnlyDictionary<Size, Rectangle> GetRectangles()
+        {
+            throw new NotImplementedException();
+        }
+
         private Rectangle TryInsert(Size size)
         {
             var rect = spots
@@ -72,7 +77,5 @@ namespace TagCloudApp.Layouter
         {
             return rectangles.Any(r => r.IsIntersected(subject, false));
         }
-
-        public IEnumerable<Rectangle> Rectangles => rectangles;
     }
 }
