@@ -16,7 +16,7 @@ namespace TagCloudApp.App.GUI.Actions
         public string Name => "Save";
         public string Description => "Save image to file";
         public double Index => 0;
-        public void Perform()
+        public void Perform(IApplication app)
         {
             pictureBox.Image?.Save("s.png", ImageFormat.Png);
         }

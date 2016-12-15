@@ -15,7 +15,7 @@ namespace TagCloudApp.App.GUI
         public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RenderSettings renderSettings, Dictionary<string, Rectangle> data)
         {
             var mainMenu = new MenuStrip();
-            mainMenu.Items.AddRange(actions.ToMenuItems());
+            mainMenu.Items.AddRange(actions.ToMenuItems(this));
             Controls.Add(mainMenu);
             data.Add("A", new Rectangle(0, 0, 1200, 120));
 

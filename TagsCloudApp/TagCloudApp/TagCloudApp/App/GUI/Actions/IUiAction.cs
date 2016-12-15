@@ -8,6 +8,6 @@ namespace TagCloudApp.App.GUI.Actions
 		string Name { get; }
 		string Description { get; }
         double Index { get; }
-		void Perform();
+		void Perform(IApplication application);
 	}
 }

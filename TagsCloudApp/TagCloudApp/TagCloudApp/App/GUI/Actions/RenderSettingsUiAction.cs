@@ -15,7 +15,7 @@ namespace TagCloudApp.App.GUI.Actions
         public string Name => "Settings";
         public string Description => "Render tag cloud";
         public double Index => 1;
-        public void Perform()
+        public void Perform(IApplication app)
         {
             SettingsForm.For(settings).ShowDialog();
         }

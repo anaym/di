@@ -25,11 +25,14 @@ namespace TagCloudApp.App.GUI.Actions
         public string Name => "GO!";
         public string Description => "Render tag cloud";
         public double Index => 1.5;
-        public void Perform()
+        public void Perform(IApplication app)
         {
             var bitmap = renderer.Render(data);
             pictureBox.Image = bitmap;
-            pictureBox.Size = bitmap.Size;
+            if (bitmap != null)
+            {
+                pictureBox.Size = bitmap.Size;
+            }
             pictureBox.Refresh();
         }
     }

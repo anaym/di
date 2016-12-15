@@ -23,10 +23,12 @@ namespace TagCloudApp
 {
     class Program
     {
+        [STAThreadAttribute]
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<TestWordSource>().As<IWordsSource>();
+            builder.RegisterType<FileWordsSourceSettings>().AsSelf().SingleInstance();
             builder.RegisterType<TestPngImageDestination>().As<IImageDestination>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
             builder.RegisterType<AutomaticTagLayoutTask>().As<ITagLayoutTask>();
