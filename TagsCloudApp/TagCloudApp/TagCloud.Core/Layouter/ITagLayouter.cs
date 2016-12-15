@@ -3,7 +3,7 @@ using System.Linq;
 using Utility;
 using Utility.Geometry;
 
-namespace TagCloudApp.Layouter
+namespace TagCloud.Core.Layouter
 {
     public interface ITagLayouter
     {

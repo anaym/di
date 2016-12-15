@@ -2,8 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using TagCloud.Core.Source;
 
-namespace TagCloudApp.IO
+namespace TagCloudApp.Source
 {
     public class FileWordsSource : IWordsSource
     {

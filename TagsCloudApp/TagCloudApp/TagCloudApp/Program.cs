@@ -9,28 +9,54 @@ using System.Windows.Forms;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+using TagCloud.Core.Layouter;
+using TagCloud.Core.Renderer;
+using TagCloud.Core.Source;
+using TagCloud.Core.Task;
 using TagCloudApp.App;
 using TagCloudApp.App.GUI;
 using TagCloudApp.App.GUI.Actions;
-using TagCloudApp.HeightExtractor;
-using TagCloudApp.IO;
 using TagCloudApp.Layouter;
-using TagCloudApp.SizeExtractor;
-using TagCloudApp.TagCloudRender;
-using TagCloudApp.WordToTag;
+using TagCloudApp.Renderer;
+using TagCloudApp.Source;
+using TagCloudApp.Task;
+using Module = Autofac.Module;
 using Rectangle = Utility.Geometry.Rectangle;
 
 namespace TagCloudApp
 {
     class Program
     {
-        [STAThreadAttribute]
+        [STAThread]
         static void Main(string[] args)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<FileWordsSource>().As<IWordsSource>();
+            builder.RegisterModule<InfrastructureModule>();
+            builder.RegisterModule<TagCloudTaskModule>();
+
+            var container = builder.Build();
+            container.Resolve<IApplication>().Run();
+        }
+    }
+
+    public class InfrastructureModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<GuiApplication>().As<IApplication>();
+            builder.RegisterType<RenderSettings>().AsSelf().SingleInstance();
             builder.RegisterType<FileWordsSourceSettings>().AsSelf().SingleInstance();
-            builder.RegisterType<TestPngImageDestination>().As<IImageDestination>();
+            builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
+            builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
+        }
+    }
+
+    public class TagCloudTaskModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<FileWordsSource>().As<IWordsSource>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
             builder.RegisterType<TagLayoutTask>().As<ITagLayoutTask>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();
@@ -39,15 +65,6 @@ namespace TagCloudApp
             builder.RegisterType<SizeCircularLayouter>().As<ISizeLayouter>();
             builder.RegisterType<TagLayouter>().As<ITagLayouter>();
             builder.RegisterType<TagCloudRenderer>().As<ITagCloudRenderer>();
-            builder.RegisterType<GuiApplication>().As<IApplication>();
-            builder.RegisterType<RenderSettings>().AsSelf().SingleInstance();
-            builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
-            builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
-
-
-            var container = builder.Build();
-            container.Resolve<IApplication>().Run();
         }
     }
 }

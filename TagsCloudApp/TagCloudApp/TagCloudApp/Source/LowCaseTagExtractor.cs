@@ -1,4 +1,6 @@
-﻿namespace TagCloudApp.WordToTag
+﻿using TagCloud.Core.Source;
+
+namespace TagCloudApp.Source
 {
     public class LowCaseTagExtractor : ITagExtractor
     {

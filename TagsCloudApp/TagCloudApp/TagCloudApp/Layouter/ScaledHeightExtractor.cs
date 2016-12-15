@@ -1,4 +1,6 @@
-﻿namespace TagCloudApp.HeightExtractor
+﻿using TagCloud.Core.Layouter;
+
+namespace TagCloudApp.Layouter
 {
     public class ScaledHeightExtractor : IHeightExtractor
     {

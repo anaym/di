@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TagCloudApp.WordToTag;
+using TagCloud.Core.Source;
 using Utility;
 
 namespace TagCloudApp

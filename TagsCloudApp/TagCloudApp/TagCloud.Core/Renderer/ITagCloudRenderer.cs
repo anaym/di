@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using Size = Utility.Geometry.Size;
 using Rectangle = Utility.Geometry.Rectangle;
 
-namespace TagCloudApp.TagCloudRender
+namespace TagCloud.Core.Renderer
 {
     public interface ITagCloudRenderer
     {

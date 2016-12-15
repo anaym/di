@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using TagCloudApp.HeightExtractor;
+using TagCloud.Core.Layouter;
 using Utility.Geometry.Extensions;
 using Size = Utility.Geometry.Size;
 
-namespace TagCloudApp.SizeExtractor
+namespace TagCloudApp.Layouter
 {
     class GraphicSizeExtractor : ISizeExtractor, IDisposable
     {

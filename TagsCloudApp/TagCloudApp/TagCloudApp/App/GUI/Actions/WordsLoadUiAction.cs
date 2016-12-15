@@ -3,7 +3,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using TagCloudApp.IO;
+using TagCloud.Core.Source;
+using TagCloudApp.Source;
 
 namespace TagCloudApp.App.GUI.Actions
 {

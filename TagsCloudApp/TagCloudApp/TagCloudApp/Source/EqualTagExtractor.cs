@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using TagCloud.Core.Source;
 
-namespace TagCloudApp.WordToTag
+namespace TagCloudApp.Source
 {
     public class EqualTagExtractor : ITagExtractor
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TagCloudApp.IO
+namespace TagCloud.Core.Source
 {
     public interface IWordsSource
     {

@@ -1,5 +1,3 @@
-using TagCloudApp.TagCloudRender;
-
 namespace TagCloudApp.App.GUI.Actions
 {
 	public interface IUiAction

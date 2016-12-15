@@ -1,7 +1,6 @@
-﻿using TagCloudApp.SizeExtractor;
-using Utility.Geometry;
+﻿using TagCloud.Core.Layouter;
 
-namespace TagCloudApp.HeightExtractor
+namespace TagCloudApp.Layouter
 {
     public class EqualHeightExtractor : IHeightExtractor
     {

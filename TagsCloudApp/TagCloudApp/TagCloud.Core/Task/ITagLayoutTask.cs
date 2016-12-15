@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace TagCloudApp
+namespace TagCloud.Core.Task
 {
     public interface ITagLayoutTask
     {

@@ -1,6 +1,6 @@
 ﻿using Size = Utility.Geometry.Size;
 
-namespace TagCloudApp.SizeExtractor
+namespace TagCloud.Core.Layouter
 {
     public interface ISizeExtractor
     {

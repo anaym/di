@@ -1,4 +1,4 @@
-﻿namespace TagCloudApp.WordToTag
+﻿namespace TagCloud.Core.Source
 {
     public interface ITagFilter
     {

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using TagCloudApp.Layouter;
-using TagCloudApp.TagCloudRender;
+using TagCloud.Core.Layouter;
+using TagCloud.Core.Renderer;
+using TagCloud.Core.Task;
 
-namespace TagCloudApp
+namespace TagCloudApp.Task
 {
     public class TagLayoutTask : ITagLayoutTask
     {

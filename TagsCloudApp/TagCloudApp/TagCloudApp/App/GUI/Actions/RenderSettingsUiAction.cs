@@ -1,4 +1,4 @@
-using TagCloudApp.TagCloudRender;
+using TagCloudApp.Renderer;
 
 namespace TagCloudApp.App.GUI.Actions
 {

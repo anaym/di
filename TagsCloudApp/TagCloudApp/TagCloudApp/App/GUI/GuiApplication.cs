@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TagCloudApp.App.GUI.Actions;
-using TagCloudApp.TagCloudRender;
-using TagCloudApp.WordToTag;
+using TagCloudApp.Renderer;
 using Utility.Geometry;
 
 namespace TagCloudApp.App.GUI

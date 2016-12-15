@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TagCloudApp.SizeExtractor;
+using TagCloud.Core.Layouter;
 using Utility.Geometry;
 
 namespace TagCloudApp.Layouter

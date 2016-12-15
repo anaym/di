@@ -2,7 +2,7 @@
 using System.Linq;
 using Utility.Geometry;
 
-namespace TagCloudApp.Layouter
+namespace TagCloud.Core.Layouter
 {
     public interface ISizeLayouter
     {

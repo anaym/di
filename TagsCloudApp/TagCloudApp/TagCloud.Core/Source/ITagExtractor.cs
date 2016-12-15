@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TagCloudApp.WordToTag
+﻿namespace TagCloud.Core.Source
 {
     public interface ITagExtractor
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace TagCloudApp.TagCloudRender
+namespace TagCloudApp.Renderer
 {
     public class RenderSettings
     {

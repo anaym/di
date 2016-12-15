@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using TagCloud.Core.Renderer;
 using Utility.Geometry;
 using Utility.Geometry.Extensions;
 using Rectangle = Utility.Geometry.Rectangle;
-using Size = Utility.Geometry.Size;
 
-namespace TagCloudApp.TagCloudRender
+namespace TagCloudApp.Renderer
 {
     public class TagCloudRenderer : ITagCloudRenderer
     {
