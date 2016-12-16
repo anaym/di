@@ -9,10 +9,11 @@ namespace TagCloudApp.App.Actions.File
     public class WordsLoadUiAction : IUiAction
     {
         private readonly LoaderSettings settings;
-        private readonly Func<string, Encoding, IFileWordsSource>[] loaderFactories;
+        private readonly Func<FileInfo, Encoding, IFileWordsSource>[] loaderFactories;
         private readonly TagCollection collection;
 
-        public WordsLoadUiAction(LoaderSettings settings, Func<string, Encoding, IFileWordsSource>[] loaderFactories, TagCollection collection)
+        public WordsLoadUiAction(LoaderSettings settings, Func<FileInfo, Encoding, IFileWordsSource>[] loaderFactories,
+            TagCollection collection)
         {
             this.settings = settings;
             this.loaderFactories = loaderFactories;
@@ -23,25 +24,33 @@ namespace TagCloudApp.App.Actions.File
         public string Name => "Load";
         public string Description => "Load words from file";
         public double Index => -0.1;
+
         public void Perform(IApplication app)
         {
             var pathes = app.RequestOpenFiles("*");
             if (pathes != null && pathes.Length > 0)
             {
-                settings.FileName = pathes.First();
-                foreach (var factory in loaderFactories)
+                try
                 {
-                    var loader = factory(settings.FileName, settings.Encoding);
-                    if (loader.IsCanRead())
+                    settings.FileInfo = new FileInfo(pathes.First());
+                    foreach (var factory in loaderFactories)
                     {
-                        collection.Clear();
-                        collection.AddAnyWords(loader.GetWords().ToList());
-                        app.ChangeDocumentFileName(Path.GetFileName(settings.FileName));
-                        app.ChangeDocumentNewStatus(true);
-                        return;
+                        var loader = factory(settings.FileInfo, settings.Encoding);
+                        if (loader.IsCanRead())
+                        {
+                            collection.Clear();
+                            collection.AddAnyWords(loader.GetWords().ToList());
+                            app.DocumentFileName = settings.FileInfo.Name;
+                            app.HasUnapplayedChanges = true;
+                            return;
+                        }
                     }
+                    app.Notify($"Can`t load {settings.FileInfo.Name}");
                 }
-                app.Notify($"Can`t load {settings.FileName}");
+                catch (Exception e)
+                {
+                    app.Notify($"Can`t load: {e}");
+                }
             }
         }
     }

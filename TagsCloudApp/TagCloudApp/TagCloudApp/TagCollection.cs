@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TagCloud.Core.Source;
 using Utility;
@@ -10,7 +9,7 @@ namespace TagCloudApp
     {
         private readonly ITagExtractor extractor;
         private readonly ITagFilter[] filters;
-        private Dictionary<string, int> tags;
+        private readonly Dictionary<string, int> tags;
 
         public TagCollection(ITagExtractor extractor, ITagFilter[] filters)
         {
@@ -28,7 +27,7 @@ namespace TagCloudApp
             {
                 tags[tag] += count;
             }
-            else if (filters.All(f => f.IsCollectedTag(tag)))
+            else if (filters.All(f => f.IsCollectableTag(tag)))
             {
                 tags.Add(tag, count);
             }
@@ -42,7 +41,10 @@ namespace TagCloudApp
             }
         }
 
-        public IReadOnlyDictionary<string, int> GetTags() => tags.ToDictionary();
+        public int MinFrequence => tags.Count == 0 ? 0 : tags.Min(t => t.Value);
+        public int MaxFrequence => tags.Count == 0 ? 0 : tags.Max(t => t.Value);
+
+        public IReadOnlyDictionary<string, int> GetTags() => tags.OrderByDescending(p => p.Value).ToDictionary();
     }
 
 }

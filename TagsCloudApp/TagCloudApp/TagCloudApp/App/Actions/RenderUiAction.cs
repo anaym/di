@@ -1,17 +1,22 @@
 using System;
 using System.Windows.Forms;
-using TagCloud.Core.Task;
+using TagCloud.Core.Layouter;
+using TagCloud.Core.Renderer;
 
 namespace TagCloudApp.App.Actions
 {
     public class RenderUiAction : IUiAction
     {
-        private readonly Func<ITagLayoutTask> taskFactory;
+        private readonly Func<ITagLayouter> layouterFactory;
+        private readonly TagCollection collection;
+        private readonly ITagCloudRenderer renderer;
         private readonly PictureBox pictureBox;
 
-        public RenderUiAction(Func<ITagLayoutTask> taskFactory, PictureBox pictureBox)
+        public RenderUiAction(Func<ITagLayouter> layouterFactory, TagCollection collection, ITagCloudRenderer renderer, PictureBox pictureBox)
         {
-            this.taskFactory = taskFactory;
+            this.layouterFactory = layouterFactory;
+            this.collection = collection;
+            this.renderer = renderer;
             this.pictureBox = pictureBox;
         }
 
@@ -21,14 +26,16 @@ namespace TagCloudApp.App.Actions
         public double Index => 1.5;
         public void Perform(IApplication app)
         {
-            var bitmap = taskFactory().Solve();
+            var rectangles = layouterFactory().PutManyTags(collection.GetTags());
+            var bitmap = renderer.Render(rectangles);
+
             pictureBox.Image = bitmap;
             if (bitmap != null)
             {
                 pictureBox.Size = bitmap.Size;
             }
             pictureBox.Refresh();
-            app.ChangeDocumentNewStatus(false);
+            app.HasUnapplayedChanges = false;
         }
     }
 }

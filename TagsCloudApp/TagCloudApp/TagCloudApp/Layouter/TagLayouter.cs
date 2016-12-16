@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TagCloud.Core.Layouter;
+﻿using TagCloud.Core.Layouter;
 using Utility.Geometry;
 
 namespace TagCloudApp.Layouter

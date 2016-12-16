@@ -7,25 +7,25 @@ namespace TagCloudApp.Source
 {
     public class TxtFileWordsSource : IFileWordsSource
     {
-        private readonly string name;
+        private readonly FileInfo file;
         private readonly Encoding encoding;
 
-        public TxtFileWordsSource(string name, Encoding encoding)
+        public TxtFileWordsSource(FileInfo file, Encoding encoding)
         {
-            this.name = name;
+            this.file = file;
             this.encoding = encoding;
         }
 
         public IEnumerable<string> GetWords()
         {
-            return File.ReadAllLines(name, encoding)
+            return File.ReadAllLines(file.FullName, encoding)
                 .SelectMany(l => l.Split(' ', '\t', '\n'))
                 .Where(w => !string.IsNullOrWhiteSpace(w));
         }
 
         public bool IsCanRead()
         {
-            return name.EndsWith(".txt");
+            return file.Extension == ".txt";
         }
     }
 }

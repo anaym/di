@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using TagCloudApp.App.Actions;
 using TagCloudApp.Renderer;
-using Utility.Geometry;
 
 namespace TagCloudApp.App.GUI
 {
     public class GuiApplication : Form, IApplication
     {
         private readonly string label;
-        private string fileName;
-        private bool isNewFile;
+        private string documentFileName;
+        private bool hasUnapplayedChanges;
         private readonly MenuStrip mainMenu;
 
         public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RendererSettings rendererSettings, TagCollection collection)
         {
             label = "Tag Cloud Layouter";
-            fileName = "";
-            isNewFile = false;
+            documentFileName = "";
+            hasUnapplayedChanges = false;
 
             mainMenu = new MenuStrip();
             mainMenu.Items.AddRange(actions.ToMenuItems(this));
@@ -30,7 +26,7 @@ namespace TagCloudApp.App.GUI
             pictureBox.Dock = DockStyle.Fill;
             Controls.Add(pictureBox);
 
-            ChangeDocumentStatus();
+            UpdateTitle();
         }
 
         public void Run()
@@ -40,29 +36,19 @@ namespace TagCloudApp.App.GUI
         }
 
         #region Utility
-        public void ChangeDocumentNewStatus(bool @new)
+        public bool HasUnapplayedChanges { set { hasUnapplayedChanges = value; UpdateTitle(); } }
+        public string DocumentFileName { set { documentFileName = value; UpdateTitle(); } }
+        private void UpdateTitle()
         {
-            isNewFile = @new;
-            ChangeDocumentStatus();
-
-        }
-
-        public void ChangeDocumentFileName(string name)
-        {
-            fileName = name;
-            ChangeDocumentStatus();
-        }
-        private void ChangeDocumentStatus()
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
+            if (string.IsNullOrWhiteSpace(documentFileName))
             {
                 Text = label;
             }
             else
             {
-                Text = $"{fileName}{(isNewFile ? '*' : ' ')} - {label}";
+                Text = $"{documentFileName}{(hasUnapplayedChanges ? '*' : ' ')} - {label}";
             }
-            mainMenu.ForeColor = !isNewFile ? Color.Black : Color.Red;
+            mainMenu.ForeColor = !hasUnapplayedChanges ? Color.Black : Color.Red;
         }
 
         public void Notify(string message)

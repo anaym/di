@@ -7,15 +7,8 @@
             TuiEngine.Instance.Run(new TuiForm());
         }
 
-        public void ChangeDocumentNewStatus(bool @new)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ChangeDocumentFileName(string name)
-        {
-            throw new System.NotImplementedException();
-        }
+        public bool HasUnapplayedChanges { get; set; }
+        public string DocumentFileName { get; set; }
 
         public void Notify(string message)
         {

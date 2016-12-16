@@ -19,9 +19,9 @@ namespace TagCloudApp.Layouter
             this.heightExtractor = heightExtractor;
         }
 
-        public Size ExtractSize(string word, int frequience)
+        public Size ExtractSize(string word, int frequency)
         {
-            var height = heightExtractor.ExtractHeight(frequience);
+            var height = heightExtractor.ExtractHeight(frequency);
             return graphic.MeasureString(word, new Font(FontFamily.GenericMonospace, height)).ToGeometrySize();
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 using TagCloud.Core.Source;
 
@@ -11,7 +12,7 @@ namespace TagCloudApp.Source
 
     public class LoaderSettings
     {
-        public string FileName { get; set; }
+        public FileInfo FileInfo { get; set; }
 
         public string EncodingName
         {

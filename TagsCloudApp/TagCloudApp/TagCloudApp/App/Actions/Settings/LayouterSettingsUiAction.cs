@@ -18,7 +18,7 @@ namespace TagCloudApp.App.Actions.Settings
         public void Perform(IApplication app)
         {
             app.Request(settings);
-            app.ChangeDocumentNewStatus(true);
+            app.HasUnapplayedChanges = true;
         }
     }
 }

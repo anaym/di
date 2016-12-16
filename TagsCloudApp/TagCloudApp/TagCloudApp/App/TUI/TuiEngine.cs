@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace TagCloudApp.App.TUI
 {
@@ -23,7 +20,7 @@ namespace TagCloudApp.App.TUI
             while (true)
             {
                 var line = Console.ReadLine().Split(' ');
-                var command = line.Length > 0 ? line[0] : "";
+                var command = line.Length > 0 ? line[0] : string.Empty;
                 if (command == "q" || command == "quit")
                 { 
                     CloseCurrent();
@@ -51,7 +48,7 @@ namespace TagCloudApp.App.TUI
             }
             else
             {
-                Process.GetCurrentProcess().Kill();
+                Environment.Exit(0);
             }
         }
 

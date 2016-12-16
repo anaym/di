@@ -5,15 +5,12 @@ using Autofac;
 using TagCloud.Core.Layouter;
 using TagCloud.Core.Renderer;
 using TagCloud.Core.Source;
-using TagCloud.Core.Task;
 using TagCloudApp.App;
 using TagCloudApp.App.Actions;
 using TagCloudApp.App.GUI;
-using TagCloudApp.App.TUI;
 using TagCloudApp.Layouter;
 using TagCloudApp.Renderer;
 using TagCloudApp.Source;
-using TagCloudApp.Task;
 using Module = Autofac.Module;
 
 namespace TagCloudApp
@@ -26,7 +23,6 @@ namespace TagCloudApp
             var builder = new ContainerBuilder();
             builder.RegisterModule<InfrastructureModule>();
             builder.RegisterModule<TagCloudTaskModule>();
-
             var container = builder.Build();
             container.Resolve<IApplication>().Run();
         }
@@ -50,11 +46,16 @@ namespace TagCloudApp
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<AdaptiveHeightExtractor>()
+                .WithParameter((p, c) => p.Name == "minCharHeight", (p, c) => c.Resolve<LayouterSettings>().MinCharHeight)
+                .WithParameter((p, c) => p.Name == "maxCharHeight", (p, c) => c.Resolve<LayouterSettings>().MaxCharHeight)
+                .WithParameter((p, c) => p.Name == "minTagFrequence", (p, c) => c.Resolve<TagCollection>().MinFrequence)
+                .WithParameter((p, c) => p.Name == "maxTagFrequence", (p, c) => c.Resolve<TagCollection>().MaxFrequence)
+                .As<IHeightExtractor>();
+
             builder.RegisterType<TxtFileWordsSource>().As<IFileWordsSource>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
-            builder.RegisterType<TagLayoutTask>().As<ITagLayoutTask>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();
-            builder.RegisterType<ScaledHeightExtractor>().As<IHeightExtractor>();
             builder.RegisterType<GraphicSizeExtractor>().As<ISizeExtractor>();
             builder.RegisterType<SizeCircularLayouter>().As<ISizeLayouter>();
             builder.RegisterType<TagLayouter>().As<ITagLayouter>();

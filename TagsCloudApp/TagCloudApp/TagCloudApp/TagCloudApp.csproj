@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="App\TUI\TuiApplication.cs" />
     <Compile Include="App\TUI\TuiEngine.cs" />
+    <Compile Include="Layouter\AdaptiveHeightExtractor.cs" />
     <Compile Include="Layouter\EqualHeightExtractor.cs" />
     <Compile Include="Layouter\LayouterSettings.cs" />
     <Compile Include="Layouter\ScaledHeightExtractor.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Renderer\TagCloudRenderer.cs" />
     <Compile Include="Source\TxtFileWordsSource.cs" />
     <Compile Include="TagCollection.cs" />
-    <Compile Include="Task\TagLayoutTask.cs" />
     <Compile Include="Source\AllTagFilter.cs" />
     <Compile Include="Source\EqualTagExtractor.cs" />
     <Compile Include="Source\LowCaseTagExtractor.cs" />

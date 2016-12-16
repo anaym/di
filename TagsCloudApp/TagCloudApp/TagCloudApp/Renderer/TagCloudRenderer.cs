@@ -33,12 +33,12 @@ namespace TagCloudApp.Renderer
         public void Render(Graphics graphics, IReadOnlyDictionary<string, Rectangle> tags)
         {
             var transform = new VectorCoordinateSystemConverter(GetCoverageRectangle(tags));
-            var s = settings.Scale;
+            var scale = settings.Scale;
             if (settings.ShowRectangles)
             {
                 foreach (var rectangle in tags.Values)
                 {
-                    var rectF = transform.Transform(rectangle*s);
+                    var rectF = transform.Transform(rectangle*scale);
                     graphics.FillRectangle(new SolidBrush(rectangle.Size.ToColor()), rectF);
                     graphics.DrawRectangle(new Pen(Color.GreenYellow), rectF.X, rectF.Y, rectF.Width, rectF.Height);
 
@@ -49,7 +49,7 @@ namespace TagCloudApp.Renderer
             var font = new Font(new FontFamily(settings.Font), 128);
             foreach (var tag in tags)
             {
-                var rectF = transform.Transform(tag.Value*s);
+                var rectF = transform.Transform(tag.Value*scale);
                 graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 var goodFont = FindFont(graphics, tag.Key, rectF.Size, font);
                 var textBrush = textBrushes[rnd.Next(textBrushes.Count)];

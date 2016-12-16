@@ -2,6 +2,6 @@
 {
     public interface IHeightExtractor
     {
-        int ExtractHeight(int frequience);
+        int ExtractHeight(int frequence);
     }
 }

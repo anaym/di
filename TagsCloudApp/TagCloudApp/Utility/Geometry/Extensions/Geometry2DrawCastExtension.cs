@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using Utility.Geometry;
 
 namespace Utility.Geometry.Extensions
 {

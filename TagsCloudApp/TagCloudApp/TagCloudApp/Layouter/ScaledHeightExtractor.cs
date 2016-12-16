@@ -11,9 +11,9 @@ namespace TagCloudApp.Layouter
             this.scale = scale;
         }
 
-        public int ExtractHeight(int frequience)
+        public int ExtractHeight(int frequence)
         {
-            return frequience*scale;
+            return frequence*scale;
         }
     }
 }

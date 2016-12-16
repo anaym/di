@@ -16,7 +16,7 @@ namespace TagCloud.Core.Layouter
         {
             return
                 tags.Select(p => new KeyValuePair<string, Rectangle>(p.Key, layouter.PutNextTag(p.Key, p.Value)))
-                    .ToDictionary();
+                    .ToDictionary(); //переформатировать
         }
     }
 }

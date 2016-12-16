@@ -2,6 +2,6 @@
 {
     public interface ITagFilter
     {
-        bool IsCollectedTag(string tag);
+        bool IsCollectableTag(string tag);
     }
 }

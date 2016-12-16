@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
@@ -8,7 +7,7 @@ using TagCloud.Core.Source;
 namespace TagCloudApp.Tests
 {
     [TestFixture]
-    public class TagCollectionShould
+    public class TagCollection_Should
     {
         private ITagFilter[] filters;
         private ITagExtractor extractor;
@@ -29,8 +28,8 @@ namespace TagCloudApp.Tests
         [Test]
         public void ContainsAllGoodTag_AfterAdd()
         {
-            A.CallTo(() => fa.IsCollectedTag(A<string>.Ignored)).Returns(true);
-            A.CallTo(() => fb.IsCollectedTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(true);
             //TODO: как сделать красивее???
             var words = new[] { "a", "bc", "def" };
             A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).ReturnsNextFromSequence(words);
@@ -38,8 +37,8 @@ namespace TagCloudApp.Tests
             collection.AddAnyWords(words);
 
             collection.GetTags().Keys.ShouldBeEquivalentTo(words);
-            A.CallTo(() => fa.IsCollectedTag(A<string>.Ignored)).MustHaveHappened();
-            A.CallTo(() => fb.IsCollectedTag(A<string>.Ignored)).MustHaveHappened();
+            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).MustHaveHappened();
+            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).MustHaveHappened();
             A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).MustHaveHappened();
         }
 
@@ -48,8 +47,8 @@ namespace TagCloudApp.Tests
         [TestCase(false, false)]
         public void NotContainsTag_WhenTagNonPassAtLeastOneFilter(bool passFirstFilter, bool passSecondFilter)
         {
-            A.CallTo(() => fa.IsCollectedTag(A<string>.Ignored)).Returns(passFirstFilter);
-            A.CallTo(() => fb.IsCollectedTag(A<string>.Ignored)).Returns(passSecondFilter);
+            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(passFirstFilter);
+            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(passSecondFilter);
             //TODO: как сделать красивее???
             var words = new[] { "a", "bc", "def" };
             A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).ReturnsNextFromSequence(words);
@@ -62,8 +61,8 @@ namespace TagCloudApp.Tests
         [Test]
         public void ExtractTagsFromWord()
         {
-            A.CallTo(() => fa.IsCollectedTag(A<string>.Ignored)).Returns(true);
-            A.CallTo(() => fb.IsCollectedTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(true);
             //TODO: как сделать красивее???
             var words = new[] { "a", "bc", "def" };
             var processedWords = new[] {"_a", "_bc_", "def_"};
