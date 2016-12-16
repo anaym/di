@@ -78,6 +78,7 @@
     <Compile Include="Layouter\GraphicSizeExtractor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\LoaderSettings.cs" />
     <Compile Include="Source\TestWordSource.cs" />
     <Compile Include="Renderer\RendererSettings.cs" />
     <Compile Include="Renderer\TagCloudRenderer.cs" />

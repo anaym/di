@@ -6,7 +6,7 @@
 
         bool HasUnapplayedChanges { set; }
         string DocumentFileName { set; }
-        void Notify(string message);
+        void Notify(string message, string label);
         string RequestSavePath(string fileName, string extension);
         string[] RequestOpenFiles(string extension);
         string RequestOpenFolders();

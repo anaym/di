@@ -10,7 +10,7 @@
         public bool HasUnapplayedChanges { get; set; }
         public string DocumentFileName { get; set; }
 
-        public void Notify(string message)
+        public void Notify(string message, string label)
         {
             throw new System.NotImplementedException();
         }

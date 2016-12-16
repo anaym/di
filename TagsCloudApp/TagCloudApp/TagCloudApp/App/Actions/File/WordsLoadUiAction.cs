@@ -9,14 +9,13 @@ namespace TagCloudApp.App.Actions.File
     public class WordsLoadUiAction : IUiAction
     {
         private readonly LoaderSettings settings;
-        private readonly Func<FileInfo, Encoding, IFileWordsSource>[] loaderFactories;
+        private readonly IFileWordsSource[] wordsSources;
         private readonly TagCollection collection;
 
-        public WordsLoadUiAction(LoaderSettings settings, Func<FileInfo, Encoding, IFileWordsSource>[] loaderFactories,
-            TagCollection collection)
+        public WordsLoadUiAction(LoaderSettings settings, IFileWordsSource[] wordsSources, TagCollection collection)
         {
             this.settings = settings;
-            this.loaderFactories = loaderFactories;
+            this.wordsSources = wordsSources;
             this.collection = collection;
         }
 
@@ -33,23 +32,22 @@ namespace TagCloudApp.App.Actions.File
                 try
                 {
                     settings.FileInfo = new FileInfo(pathes.First());
-                    foreach (var factory in loaderFactories)
+                    foreach (var source in wordsSources)
                     {
-                        var loader = factory(settings.FileInfo, settings.Encoding);
-                        if (loader.IsCanRead())
+                        if (source.IsCanRead())
                         {
                             collection.Clear();
-                            collection.AddAnyWords(loader.GetWords().ToList());
+                            collection.AddAnyWords(source.GetWords().ToList());
                             app.DocumentFileName = settings.FileInfo.Name;
                             app.HasUnapplayedChanges = true;
                             return;
                         }
                     }
-                    app.Notify($"Can`t load {settings.FileInfo.Name}");
+                    app.Notify($"Can`t load '{settings.FileInfo.Name}'", "Error:");
                 }
                 catch (Exception e)
                 {
-                    app.Notify($"Can`t load: {e}");
+                    app.Notify($"Can`t load: {e}", "Exception!");
                 }
             }
         }

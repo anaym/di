@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using TagCloudApp.App.Actions;
 using TagCloudApp.Renderer;
@@ -12,8 +13,11 @@ namespace TagCloudApp.App.GUI
         private bool hasUnapplayedChanges;
         private readonly MenuStrip mainMenu;
 
-        public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RendererSettings rendererSettings, TagCollection collection)
+        public GuiApplication(IUiAction[] actions, PictureBox pictureBox)
         {
+            StartPosition = FormStartPosition.CenterScreen;
+            Size = new Size(512, 512);
+
             label = "Tag Cloud Layouter";
             documentFileName = "";
             hasUnapplayedChanges = false;
@@ -51,9 +55,9 @@ namespace TagCloudApp.App.GUI
             mainMenu.ForeColor = !hasUnapplayedChanges ? Color.Black : Color.Red;
         }
 
-        public void Notify(string message)
+        public void Notify(string comment, string title="Attention!")
         {
-            MessageBox.Show(message);
+            MessageBox.Show(comment, title, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         public string RequestSavePath(string fileName="", string extensions="")
