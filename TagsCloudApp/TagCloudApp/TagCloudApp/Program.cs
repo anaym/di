@@ -37,8 +37,9 @@ namespace TagCloudApp
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<GuiApplication>().As<IApplication>();
-            builder.RegisterType<RenderSettings>().AsSelf().SingleInstance();
-            builder.RegisterType<FileWordsSourceSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<LoaderSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<LayouterSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<RendererSettings>().AsSelf().SingleInstance();
             builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
             builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
@@ -49,7 +50,7 @@ namespace TagCloudApp
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<FileWordsSource>().As<IWordsSource>();
+            builder.RegisterType<TxtFileWordsSource>().As<IFileWordsSource>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
             builder.RegisterType<TagLayoutTask>().As<ITagLayoutTask>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();

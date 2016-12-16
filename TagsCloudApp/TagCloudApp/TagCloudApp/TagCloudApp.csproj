@@ -54,10 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Actions\IUiAction.cs" />
-    <Compile Include="App\Actions\RenderSettingsUiAction.cs" />
+    <Compile Include="App\Actions\Settings\LayouterSettingsUiAction.cs" />
+    <Compile Include="App\Actions\Settings\RendererSettingsUiAction.cs" />
     <Compile Include="App\Actions\RenderUiAction.cs" />
-    <Compile Include="App\Actions\SaveImageUiAction.cs" />
-    <Compile Include="App\Actions\WordsLoadUiAction.cs" />
+    <Compile Include="App\Actions\File\SaveImageUiAction.cs" />
+    <Compile Include="App\Actions\Settings\LoaderSettingsUiAction.cs" />
+    <Compile Include="App\Actions\File\WordsLoadUiAction.cs" />
     <Compile Include="App\GUI\SettingsForm.cs" />
     <Compile Include="App\GUI\GuiActionExtensions.cs" />
     <Compile Include="App\GUI\GuiApplication.cs">
@@ -66,17 +68,19 @@
     <Compile Include="App\TUI\TuiApplication.cs" />
     <Compile Include="App\TUI\TuiEngine.cs" />
     <Compile Include="Layouter\EqualHeightExtractor.cs" />
+    <Compile Include="Layouter\LayouterSettings.cs" />
     <Compile Include="Layouter\ScaledHeightExtractor.cs" />
     <Compile Include="App\IApplication.cs" />
-    <Compile Include="Source\FileWordsSource.cs" />
+    <Compile Include="Source\IFileWordsSource.cs" />
     <Compile Include="Layouter\SizeCircularLayouter.cs" />
     <Compile Include="Layouter\TagLayouter.cs" />
     <Compile Include="Layouter\GraphicSizeExtractor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\TestWordSource.cs" />
-    <Compile Include="Renderer\RenderSettings.cs" />
+    <Compile Include="Renderer\RendererSettings.cs" />
     <Compile Include="Renderer\TagCloudRenderer.cs" />
+    <Compile Include="Source\TxtFileWordsSource.cs" />
     <Compile Include="TagCollection.cs" />
     <Compile Include="Task\TagLayoutTask.cs" />
     <Compile Include="Source\AllTagFilter.cs" />

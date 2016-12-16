@@ -1,7 +1,7 @@
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace TagCloudApp.App.Actions
+namespace TagCloudApp.App.Actions.File
 {
     public class SaveImageUiAction : IUiAction
     {

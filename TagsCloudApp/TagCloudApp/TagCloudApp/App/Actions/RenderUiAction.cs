@@ -16,7 +16,7 @@ namespace TagCloudApp.App.Actions
         }
 
         public string Category => "Render";
-        public string Name => "GO!";
+        public string Name => "Render";
         public string Description => "Render tag cloud";
         public double Index => 1.5;
         public void Perform(IApplication app)
@@ -28,6 +28,7 @@ namespace TagCloudApp.App.Actions
                 pictureBox.Size = bitmap.Size;
             }
             pictureBox.Refresh();
+            app.ChangeDocumentNewStatus(false);
         }
     }
 }

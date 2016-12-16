@@ -13,9 +13,9 @@ namespace TagCloudApp.Renderer
     public class TagCloudRenderer : ITagCloudRenderer
     {
         private readonly StringFormat stringFormat;
-        private readonly RenderSettings settings;
+        private readonly RendererSettings settings;
 
-        public TagCloudRenderer(RenderSettings settings)
+        public TagCloudRenderer(RendererSettings settings)
         {
             this.settings = settings;
             stringFormat = new StringFormat
@@ -46,11 +46,12 @@ namespace TagCloudApp.Renderer
             }
             var rnd = new Random();
             var textBrushes = settings.TextColors.Select(c => new SolidBrush(c)).ToList();
+            var font = new Font(new FontFamily(settings.Font), 128);
             foreach (var tag in tags)
             {
                 var rectF = transform.Transform(tag.Value*s);
                 graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                var goodFont = FindFont(graphics, tag.Key, rectF.Size, new Font(FontFamily.GenericMonospace, 128));
+                var goodFont = FindFont(graphics, tag.Key, rectF.Size, font);
                 var textBrush = textBrushes[rnd.Next(textBrushes.Count)];
                 graphics.DrawString(tag.Key, goodFont, textBrush, rectF, stringFormat);
             }

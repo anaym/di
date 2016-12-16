@@ -22,11 +22,15 @@ namespace TagCloudApp.App.GUI
 
 		private static ToolStripMenuItem CreateToplevelMenuItem(string name, IList<IUiAction> items, IApplication app)
 		{
+		    if (items.Count == 1 && name == items.First().Name)
+		    {
+		        return items.First().ToMenuItem(app);
+		    }
 			var menuItems = items.Select(a => a.ToMenuItem(app)).ToArray();
 			return new ToolStripMenuItem(name, null, menuItems);
 		}
 
-	    public static ToolStripItem ToMenuItem(this IUiAction action, IApplication app)
+	    public static ToolStripMenuItem ToMenuItem(this IUiAction action, IApplication app)
 	    {
 	        return
 	            new ToolStripMenuItem(action.Name, null, (sender, args) => action.Perform(app))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TagCloudApp.App.Actions;
@@ -10,16 +11,26 @@ namespace TagCloudApp.App.GUI
 {
     public class GuiApplication : Form, IApplication
     {
+        private readonly string label;
+        private string fileName;
+        private bool isNewFile;
+        private readonly MenuStrip mainMenu;
 
-        public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RenderSettings renderSettings, TagCollection collection)
+        public GuiApplication(IUiAction[] actions, PictureBox pictureBox, RendererSettings rendererSettings, TagCollection collection)
         {
-            var mainMenu = new MenuStrip();
+            label = "Tag Cloud Layouter";
+            fileName = "";
+            isNewFile = false;
+
+            mainMenu = new MenuStrip();
             mainMenu.Items.AddRange(actions.ToMenuItems(this));
             mainMenu.Dock = DockStyle.Bottom;
             Controls.Add(mainMenu);
 
             pictureBox.Dock = DockStyle.Fill;
             Controls.Add(pictureBox);
+
+            ChangeDocumentStatus();
         }
 
         public void Run()
@@ -29,6 +40,36 @@ namespace TagCloudApp.App.GUI
         }
 
         #region Utility
+        public void ChangeDocumentNewStatus(bool @new)
+        {
+            isNewFile = @new;
+            ChangeDocumentStatus();
+
+        }
+
+        public void ChangeDocumentFileName(string name)
+        {
+            fileName = name;
+            ChangeDocumentStatus();
+        }
+        private void ChangeDocumentStatus()
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                Text = label;
+            }
+            else
+            {
+                Text = $"{fileName}{(isNewFile ? '*' : ' ')} - {label}";
+            }
+            mainMenu.ForeColor = !isNewFile ? Color.Black : Color.Red;
+        }
+
+        public void Notify(string message)
+        {
+            MessageBox.Show(message);
+        }
+
         public string RequestSavePath(string fileName="", string extensions="")
         {
             var dialog = new SaveFileDialog

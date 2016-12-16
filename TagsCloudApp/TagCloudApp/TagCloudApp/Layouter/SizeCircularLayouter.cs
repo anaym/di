@@ -16,10 +16,13 @@ namespace TagCloudApp.Layouter
         private readonly HashSet<Vector> spots;
         private Vector averageVector;
 
-        public SizeCircularLayouter()
+        public SizeCircularLayouter(LayouterSettings settings) : this(settings.Width, settings.Height)
+        { }
+
+        public SizeCircularLayouter(int w, int h)
         {
             Centre = new Vector(0, 0);
-            Extension = new Vector(2, 1);
+            Extension = new Vector(w, h);
             rectangles = new List<Rectangle>();
             averageVector = Vector.Zero;
             spots = new HashSet<Vector>();
