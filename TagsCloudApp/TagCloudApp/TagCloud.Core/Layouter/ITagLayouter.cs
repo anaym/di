@@ -14,6 +14,7 @@ namespace TagCloud.Core.Layouter
     {
         public static IReadOnlyDictionary<string, Rectangle> PutManyTags(this ITagLayouter layouter, IReadOnlyDictionary<string, int> tags)
         {
+            // CR: Don't commit such comments. Check diff before commit
             return
                 tags.Select(p => new KeyValuePair<string, Rectangle>(p.Key, layouter.PutNextTag(p.Key, p.Value)))
                     .ToDictionary(); //переформатировать

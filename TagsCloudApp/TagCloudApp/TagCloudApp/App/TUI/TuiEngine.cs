@@ -19,8 +19,10 @@ namespace TagCloudApp.App.TUI
             PushToStack(form);
             while (true)
             {
+                // CR: Resharper warning makes sense
                 var line = Console.ReadLine().Split(' ');
                 var command = line.Length > 0 ? line[0] : string.Empty;
+                // CR: Can be replaced with polymorphism
                 if (command == "q" || command == "quit")
                 { 
                     CloseCurrent();
@@ -58,6 +60,7 @@ namespace TagCloudApp.App.TUI
         }
     }
 
+    // CR: 1 class = 1 file
     public class TuiForm
     {
         public readonly Dictionary<string, Func<string[], TuiForm>> Controls;
@@ -73,7 +76,7 @@ namespace TagCloudApp.App.TUI
 
         public void Handle(string command, string[] args)
         {
-
+            // CR: Can be replaced with polymorphism
             if (Controls.ContainsKey(command))
             {
                 TuiEngine.Instance.PushToStack(Controls[command](args));

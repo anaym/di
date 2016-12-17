@@ -15,6 +15,7 @@ using Module = Autofac.Module;
 
 namespace TagCloudApp
 {
+    // CR: internal
     class Program
     {
         [STAThread]
@@ -28,6 +29,7 @@ namespace TagCloudApp
         }
     }
 
+    // CR: 1 file = 1 class
     public class InfrastructureModule : Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -42,6 +44,7 @@ namespace TagCloudApp
         }
     }
 
+    // CR: 1 file = 1 class
     public class TagCloudTaskModule : Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -49,6 +52,7 @@ namespace TagCloudApp
             builder.RegisterType<AdaptiveHeightExtractor>()
                 .WithParameter((p, c) => p.Name == "minCharHeight", (p, c) => c.Resolve<LayouterSettings>().MinCharHeight)
                 .WithParameter((p, c) => p.Name == "maxCharHeight", (p, c) => c.Resolve<LayouterSettings>().MaxCharHeight)
+                // CR: Using resolved class state on the resolving stage makes implicit dependencies
                 .WithParameter((p, c) => p.Name == "minTagFrequence", (p, c) => c.Resolve<TagCollection>().MinFrequence)
                 .WithParameter((p, c) => p.Name == "maxTagFrequence", (p, c) => c.Resolve<TagCollection>().MaxFrequence)
                 .As<IHeightExtractor>();
