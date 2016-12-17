@@ -19,10 +19,6 @@ namespace TagCloudApp
             builder.RegisterType<GuiApplication>().As<IApplication>();
             builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
 
-            var form = new Form();
-            var engine = Engine.FromConsole(form);
-            engine.Run();
-
             var container = builder.Build();
             container.Resolve<IApplication>().Run();
         }
