@@ -1,5 +1,4 @@
 using TagCloud.Source;
-using TagCloudApp.GUI;
 
 namespace TagCloudApp.Actions.Settings
 {
@@ -18,7 +17,7 @@ namespace TagCloudApp.Actions.Settings
         public double Index => 1;
         public void Perform(IApplication app)
         {
-            SettingsForm.For(settings).ShowDialog();
+            app.Request(settings);
         }
     }
 }

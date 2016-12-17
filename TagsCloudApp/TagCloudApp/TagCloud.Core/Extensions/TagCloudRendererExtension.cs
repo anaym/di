@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using TagCloud.Core.Renderer;
 using Rectangle = Utility.Geometry.Rectangle;
 
-namespace TagCloud.Core.Renderer
+namespace TagCloud.Core.Extensions
 {
     public static class TagCloudRendererExtension
     {

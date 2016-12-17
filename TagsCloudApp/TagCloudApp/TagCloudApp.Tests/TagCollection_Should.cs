@@ -4,7 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using TagCloud.Core.Source;
 
-namespace TagCloudApp.Tests
+namespace TagCloud.Tests
 {
     [TestFixture]
     public class TagCollection_Should

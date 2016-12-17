@@ -6,8 +6,8 @@
     <ProjectGuid>{067456C0-086C-46A8-B37F-1405717B7BFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TagCloudApp.Tests</RootNamespace>
-    <AssemblyName>TagCloudApp.Tests</AssemblyName>
+    <RootNamespace>TagCloud.Tests</RootNamespace>
+    <AssemblyName>TagCloud.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -63,9 +63,9 @@
       <Project>{a36ee193-d6ba-41fa-877b-d888652f8511}</Project>
       <Name>TagCloud.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TagCloudApp\TagCloudApp.csproj">
-      <Project>{4cefc4fe-e3b3-470c-98d8-b709015e3894}</Project>
-      <Name>TagCloudApp</Name>
+    <ProjectReference Include="..\TagCloud\TagCloud.csproj">
+      <Project>{b32edd23-dd36-4eaa-9b4b-a051d178806b}</Project>
+      <Name>TagCloud</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

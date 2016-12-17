@@ -8,7 +8,7 @@ using TagCloud.Source;
 
 namespace TagCloudApp
 {
-    public class TagCloudTaskModule : Module
+    public class TagCloudModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
