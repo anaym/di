@@ -10,6 +10,6 @@ namespace TagCloud.Settings
         public int Scale { get; set; } = 1;
         public bool ShowRectangles { get; set; } = false;
         public GenericFontFamilies Font { get; set; } = GenericFontFamilies.Monospace;
-        public string SettingsName => "Renderer";
+        public string GetSettingsName() => "Renderer";
     }
 }

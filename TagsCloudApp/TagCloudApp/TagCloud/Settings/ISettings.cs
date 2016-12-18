@@ -2,6 +2,6 @@
 {
     public interface ISettings
     {
-        string SettingsName { get; }
+        string GetSettingsName();
     }
 }

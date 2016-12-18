@@ -50,6 +50,7 @@
     <Compile Include="TUI\Commands\ICommand.cs" />
     <Compile Include="TUI\Commands\MissCommand.cs" />
     <Compile Include="TUI\Commands\Result.cs" />
+    <Compile Include="TUI\Commands\StringRequestCommand.cs" />
     <Compile Include="TUI\Engine.cs" />
     <Compile Include="TUI\Forms\Form.cs" />
   </ItemGroup>

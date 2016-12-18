@@ -7,11 +7,11 @@ namespace TagCloud.GUI.Extensions
 {
 	public static class SettingsExtensions
 	{
-		public static ToolStripItem[] ToMenuItems(this ISettings[] actions, string category)
+		public static ToolStripItem[] ToMenuItems(this ISettings[] settings, string category)
 		{
-			var items = actions
+			var items = settings
+                .OrderBy(g => g.GetSettingsName())
                 .GroupBy(a => 0)
-                .OrderBy(g => g.First().SettingsName)
 				.Select(g => CreateToplevelMenuItem(category, g.ToList()))
 				.Cast<ToolStripItem>()
 				.ToArray();
@@ -20,7 +20,7 @@ namespace TagCloud.GUI.Extensions
 
 		private static ToolStripMenuItem CreateToplevelMenuItem(string name, IList<ISettings> items)
 		{
-		    if (items.Count == 1 && name == items.First().SettingsName)
+		    if (items.Count == 1 && name == items.First().GetSettingsName())
 		    {
 		        return items.First().ToMenuItem();
 		    }
@@ -30,9 +30,9 @@ namespace TagCloud.GUI.Extensions
 
 	    public static ToolStripMenuItem ToMenuItem(this ISettings settings)
 	    {
-	        return new ToolStripMenuItem(settings.SettingsName, null, (sender, args) => settings.RequestSetup())
+	        return new ToolStripMenuItem(settings.GetSettingsName(), null, (sender, args) => settings.RequestSetup())
 	            {
-	                ToolTipText = $"Settings for {settings.SettingsName}",
+	                ToolTipText = $"Settings for {settings.GetSettingsName()}",
 	                Tag = settings
 	            };
 	    }

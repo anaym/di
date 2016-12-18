@@ -61,6 +61,6 @@ namespace TagCloud.Settings
             }
         }
         public Encoding Encoding { get; private set; } = Encoding.Default;
-        public string SettingsName => "Loader";
+        public string GetSettingsName() => "Loader";
     }
 }

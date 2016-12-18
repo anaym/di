@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TagCloud.TUI.TUI.Forms;
 
 namespace TagCloud.TUI.TUI.Commands
@@ -9,7 +10,8 @@ namespace TagCloud.TUI.TUI.Commands
         public string Description { get; } = null;
         public Tuple<Result, Form> Perform(string command, string[] args, Engine engine)
         {
-            engine.Notify($"Command `{command}` is not supported!");
+            var help = engine.CurrentForm.Commands.FirstOrDefault(c => c is HelpCommand) as HelpCommand;
+            engine.Notify($"Command `{command}` is not supported! {(help != null ? $"Use `{help.Name}` for list of all commands" : "")}");
             return Tuple.Create(Result.Pass, (Form)null);
         }
     }
