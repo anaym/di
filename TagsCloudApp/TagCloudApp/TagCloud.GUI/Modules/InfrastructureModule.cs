@@ -1,14 +1,8 @@
-﻿using System.Reflection;
-using Autofac;
-using TagCloud;
-using TagCloud.Layouter;
-using TagCloud.Renderer;
+﻿using Autofac;
 using TagCloud.Settings;
-using TagCloud.Source;
-using TagCloudApp.Actions;
 using Module = Autofac.Module;
 
-namespace TagCloudApp
+namespace TagCloud.GUI.Modules
 {
     public class InfrastructureModule : Module
     {
@@ -18,7 +12,9 @@ namespace TagCloudApp
             builder.RegisterType<LayouterSettings>().AsSelf().SingleInstance();
             builder.RegisterType<RendererSettings>().AsSelf().SingleInstance();
             builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).As<IUiAction>();
+            builder.RegisterAssemblyTypes(typeof(ISettings).Assembly).As<ISettings>().SingleInstance();
+            builder.RegisterType<TagCloudCreator>().AsSelf();
+            builder.RegisterType<MainForm>().AsSelf();
         }
     }
 }

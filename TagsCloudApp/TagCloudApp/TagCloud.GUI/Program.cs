@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using Autofac;
-using TagCloudApp.GUI;
+using TagCloud.GUI.Modules;
 
-namespace TagCloudApp
+namespace TagCloud.GUI
 {
     internal class Program
     {
@@ -14,11 +14,8 @@ namespace TagCloudApp
             builder.RegisterModule<InfrastructureModule>();
             builder.RegisterModule<TagCloudModule>();
 
-            builder.RegisterType<GuiApplication>().As<IApplication>();
-            builder.RegisterType<PictureBox>().AsSelf().SingleInstance();
-
             var container = builder.Build();
-            container.Resolve<IApplication>().Run();
+            container.Resolve<MainForm>().Run();
         }
     }
 }

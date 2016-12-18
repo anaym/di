@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using TagCloud.Core.Renderer;
+using TagCloud.Settings;
 using Utility.Geometry;
 using Utility.Geometry.Extensions;
 using Rectangle = Utility.Geometry.Rectangle;

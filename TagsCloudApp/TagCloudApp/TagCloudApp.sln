@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloudApp", "TagCloudApp\TagCloudApp.csproj", "{4CEFC4FE-E3B3-470C-98D8-B709015E3894}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{03CC6366-6D93-4B58-BFDC-BFDA5AAD222B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud.Core", "TagCloud.Core\TagCloud.Core.csproj", "{A36EE193-D6BA-41FA-877B-D888652F8511}"
@@ -13,16 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud.Tests", "TagCloudA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud", "TagCloud\TagCloud.csproj", "{B32EDD23-DD36-4EAA-9B4B-A051D178806B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud.GUI", "TagCloud.GUI\TagCloud.GUI.csproj", "{98DB3F6F-5428-4116-9A95-7F286B18D0FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud.TUI", "TagCloud.TUI\TagCloud.TUI.csproj", "{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{B27A0D21-9672-451B-B4F7-9555CAFD0869}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CEFC4FE-E3B3-470C-98D8-B709015E3894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CEFC4FE-E3B3-470C-98D8-B709015E3894}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CEFC4FE-E3B3-470C-98D8-B709015E3894}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CEFC4FE-E3B3-470C-98D8-B709015E3894}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03CC6366-6D93-4B58-BFDC-BFDA5AAD222B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03CC6366-6D93-4B58-BFDC-BFDA5AAD222B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03CC6366-6D93-4B58-BFDC-BFDA5AAD222B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,8 +39,20 @@ Global
 		{B32EDD23-DD36-4EAA-9B4B-A051D178806B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B32EDD23-DD36-4EAA-9B4B-A051D178806B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B32EDD23-DD36-4EAA-9B4B-A051D178806B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98DB3F6F-5428-4116-9A95-7F286B18D0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98DB3F6F-5428-4116-9A95-7F286B18D0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98DB3F6F-5428-4116-9A95-7F286B18D0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98DB3F6F-5428-4116-9A95-7F286B18D0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A36EE193-D6BA-41FA-877B-D888652F8511} = {B27A0D21-9672-451B-B4F7-9555CAFD0869}
+		{98DB3F6F-5428-4116-9A95-7F286B18D0FD} = {B27A0D21-9672-451B-B4F7-9555CAFD0869}
 	EndGlobalSection
 EndGlobal

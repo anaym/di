@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using TagCloud;
 using TagCloud.Core.Source;
+using TagCloud.Settings;
 using TagCloud.Source;
 
 namespace TagCloudApp.Actions.File

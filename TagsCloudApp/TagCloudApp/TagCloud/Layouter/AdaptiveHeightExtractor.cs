@@ -1,4 +1,5 @@
 ﻿using TagCloud.Core.Layouter;
+using TagCloud.Settings;
 
 namespace TagCloud.Layouter
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TagCloud.Core.Layouter;
+using TagCloud.Settings;
 using Utility;
 using Utility.Geometry;
 

@@ -1,4 +1,5 @@
 using TagCloud.Layouter;
+using TagCloud.Settings;
 
 namespace TagCloudApp.Actions.Settings
 {

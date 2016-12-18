@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace TagCloud.Source
+namespace TagCloud.Settings
 {
-    public class LoaderSettings
+    public class LoaderSettings : ISettings
     {
         public FileInfo FileInfo { get; set; }
 
@@ -61,5 +61,6 @@ namespace TagCloud.Source
             }
         }
         public Encoding Encoding { get; private set; } = Encoding.Default;
+        public string SettingsName => "Loader";
     }
 }

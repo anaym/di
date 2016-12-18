@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B32EDD23-DD36-4EAA-9B4B-A051D178806B}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{AEA5F2F7-0C30-46FA-A78F-A45155AF92BB}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TagCloud</RootNamespace>
-    <AssemblyName>TagCloud</AssemblyName>
+    <RootNamespace>TagCloud.TUI</RootNamespace>
+    <AssemblyName>TagCloud.TUI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,35 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Layouter\AdaptiveHeightExtractor.cs" />
-    <Compile Include="Layouter\EqualHeightExtractor.cs" />
-    <Compile Include="Layouter\GraphicSizeExtractor.cs" />
-    <Compile Include="Settings\ISettings.cs" />
-    <Compile Include="Settings\LayouterSettings.cs" />
-    <Compile Include="Layouter\ScaledHeightExtractor.cs" />
-    <Compile Include="Layouter\SizeCircularLayouter.cs" />
-    <Compile Include="Layouter\TagLayouter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\RendererSettings.cs" />
-    <Compile Include="Renderer\TagCloudRenderer.cs" />
-    <Compile Include="Source\AllTagFilter.cs" />
-    <Compile Include="Source\EqualTagExtractor.cs" />
-    <Compile Include="Settings\LoaderSettings.cs" />
-    <Compile Include="Source\LowCaseTagExtractor.cs" />
-    <Compile Include="Source\TestWordSource.cs" />
-    <Compile Include="Source\TxtFileWordsSource.cs" />
-    <Compile Include="TagCloudCreator.cs" />
-    <Compile Include="TagCollection.cs" />
+    <Compile Include="TUI\Commands\EscapeCommand.cs" />
+    <Compile Include="TUI\Commands\HelpCommand.cs" />
+    <Compile Include="TUI\Commands\ICommand.cs" />
+    <Compile Include="TUI\Commands\MissCommand.cs" />
+    <Compile Include="TUI\Commands\Result.cs" />
+    <Compile Include="TUI\Engine.cs" />
+    <Compile Include="TUI\Forms\Form.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TagCloud.Core\TagCloud.Core.csproj">
-      <Project>{a36ee193-d6ba-41fa-877b-d888652f8511}</Project>
-      <Name>TagCloud.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{03cc6366-6d93-4b58-bfdc-bfda5aad222b}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

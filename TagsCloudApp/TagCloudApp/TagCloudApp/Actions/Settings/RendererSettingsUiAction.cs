@@ -1,4 +1,5 @@
 using TagCloud.Renderer;
+using TagCloud.Settings;
 
 namespace TagCloudApp.Actions.Settings
 {
