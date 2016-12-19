@@ -8,11 +8,10 @@ namespace TagCloud.GUI.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<LoaderSettings>().AsSelf().SingleInstance();
-            builder.RegisterType<LayouterSettings>().AsSelf().SingleInstance();
-            builder.RegisterType<RendererSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<LoaderSettings>().AsSelf().As<ISettings>().SingleInstance();
+            builder.RegisterType<LayouterSettings>().AsSelf().As<ISettings>().SingleInstance();
+            builder.RegisterType<RendererSettings>().AsSelf().As<ISettings>().SingleInstance();
             builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
-            builder.RegisterAssemblyTypes(typeof(ISettings).Assembly).As<ISettings>().SingleInstance();
             builder.RegisterType<TagCloudCreator>().AsSelf();
             builder.RegisterType<MainForm>().AsSelf();
         }
