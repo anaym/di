@@ -1,9 +1,10 @@
-﻿using Size = Utility.Geometry.Size;
+﻿using Utility.RailwayExceptions;
+using Size = Utility.Geometry.Size;
 
 namespace TagCloud.Core.Layouter
 {
     public interface ISizeExtractor
     {
-        Size ExtractSize(string word, int frequency);
+        Result<Size> ExtractSize(Result<string> word, Result<int> frequency);
     }
 }

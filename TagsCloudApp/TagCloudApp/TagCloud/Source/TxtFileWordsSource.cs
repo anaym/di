@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using TagCloud.Core.Source;
 using TagCloud.Settings;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.Source
 {
@@ -15,16 +16,16 @@ namespace TagCloud.Source
             this.settings = settings;
         }
 
-        public IEnumerable<string> GetWords()
+        public Result<IEnumerable<string>> GetWords()
         {
-            return File.ReadAllLines(settings.FileInfo.FullName, settings.Encoding)
+            return Result<IEnumerable<string>>.Success(File.ReadAllLines(settings.FileInfo.FullName, settings.Encoding)
                 .SelectMany(l => l.Split(settings.Separators.ToArray()))
-                .Where(w => !string.IsNullOrWhiteSpace(w));
+                .Where(w => !string.IsNullOrWhiteSpace(w)));
         }
 
-        public bool IsCanRead()
+        public Result<bool> IsCanRead()
         {
-            return settings.FileInfo.Extension == ".txt";
+            return Result.Success(settings.FileInfo.Extension == ".txt");
         }
     }
 }

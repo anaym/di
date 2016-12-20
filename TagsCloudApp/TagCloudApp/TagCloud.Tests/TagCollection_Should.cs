@@ -3,6 +3,8 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 using TagCloud.Core.Source;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Tests
 {
@@ -28,18 +30,18 @@ namespace TagCloud.Tests
         [Test]
         public void ContainsAllGoodTag_AfterAdd()
         {
-            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(true);
-            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fa.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(true));
+            A.CallTo(() => fa.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(true));
             //TODO: как сделать красивее???
-            var words = new[] { "a", "bc", "def" };
-            A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).ReturnsNextFromSequence(words);
+            var words = new[] { "a", "bc", "def" }.Select(Result.Success).ToArray();
+            A.CallTo(() => extractor.ExtractTag(A<Result<string>>.Ignored)).ReturnsNextFromSequence(words);
 
             collection.AddAnyWords(words);
 
             collection.GetTags().Keys.ShouldBeEquivalentTo(words);
-            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).MustHaveHappened();
-            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).MustHaveHappened();
-            A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).MustHaveHappened();
+            A.CallTo(() => fa.IsCollectableTag(A<Result<string>>.Ignored)).MustHaveHappened();
+            A.CallTo(() => fb.IsCollectableTag(A<Result<string>>.Ignored)).MustHaveHappened();
+            A.CallTo(() => extractor.ExtractTag(A<Result<string>>.Ignored)).MustHaveHappened();
         }
 
         [TestCase(true, false)]
@@ -47,31 +49,31 @@ namespace TagCloud.Tests
         [TestCase(false, false)]
         public void NotContainsTag_WhenTagNonPassAtLeastOneFilter(bool passFirstFilter, bool passSecondFilter)
         {
-            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(passFirstFilter);
-            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(passSecondFilter);
+            A.CallTo(() => fa.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(passFirstFilter));
+            A.CallTo(() => fb.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(passSecondFilter));
             //TODO: как сделать красивее???
-            var words = new[] { "a", "bc", "def" };
-            A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).ReturnsNextFromSequence(words);
+            var words = new[] { "a", "bc", "def" }.Select(Result.Success).ToArray();
+            A.CallTo(() => extractor.ExtractTag(A<Result<string>>.Ignored)).ReturnsNextFromSequence(words);
 
             collection.AddAnyWords(words);
 
-            collection.GetTags().Keys.ShouldBeEquivalentTo(Enumerable.Empty<string>());
+            collection.GetTags().Keys.ShouldBeEquivalentTo(Enumerable.Empty<Result<string>>());
         }
 
         [Test]
         public void ExtractTagsFromWord()
         {
-            A.CallTo(() => fa.IsCollectableTag(A<string>.Ignored)).Returns(true);
-            A.CallTo(() => fb.IsCollectableTag(A<string>.Ignored)).Returns(true);
+            A.CallTo(() => fa.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(true));
+            A.CallTo(() => fb.IsCollectableTag(A<Result<string>>.Ignored)).Returns(Result.Success(true));
             //TODO: как сделать красивее???
-            var words = new[] { "a", "bc", "def" };
-            var processedWords = new[] {"_a", "_bc_", "def_"};
-            A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).ReturnsNextFromSequence(processedWords);
+            var words = new[] { "a", "bc", "def" }.Select(Result.Success).ToArray();
+            var processedWords = new[] {"_a", "_bc_", "def_"}.Select(Result.Success).ToArray();
+            A.CallTo(() => extractor.ExtractTag(A<Result<string>>.Ignored)).ReturnsNextFromSequence(processedWords);
 
             collection.AddAnyWords(words);
 
             collection.GetTags().Keys.ShouldBeEquivalentTo(processedWords);
-            A.CallTo(() => extractor.ExtractTag(A<string>.Ignored)).MustHaveHappened();
+            A.CallTo(() => extractor.ExtractTag(A<Result<string>>.Ignored)).MustHaveHappened();
         }
     }
 }

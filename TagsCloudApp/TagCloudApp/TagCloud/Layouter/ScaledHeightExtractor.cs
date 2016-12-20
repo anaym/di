@@ -1,4 +1,6 @@
 ﻿using TagCloud.Core.Layouter;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Layouter
 {
@@ -11,9 +13,9 @@ namespace TagCloud.Layouter
             this.scale = scale;
         }
 
-        public int ExtractHeight(int frequence)
+        public Result<int> ExtractHeight(Result<int> frequence)
         {
-            return frequence*scale;
+            return frequence.Select(f => f*scale);
         }
     }
 }

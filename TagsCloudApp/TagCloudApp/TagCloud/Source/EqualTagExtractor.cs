@@ -1,10 +1,11 @@
 ﻿using TagCloud.Core.Source;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.Source
 {
     public class EqualTagExtractor : ITagExtractor
     {
-        public string ExtractTag(string word)
+        public Result<string> ExtractTag(Result<string> word)
         {
             return word;
         }

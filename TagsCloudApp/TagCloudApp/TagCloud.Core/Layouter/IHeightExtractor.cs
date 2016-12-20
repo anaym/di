@@ -1,7 +1,9 @@
-﻿namespace TagCloud.Core.Layouter
+﻿using Utility.RailwayExceptions;
+
+namespace TagCloud.Core.Layouter
 {
     public interface IHeightExtractor
     {
-        int ExtractHeight(int frequence);
+        Result<int> ExtractHeight(Result<int> frequence);
     }
 }

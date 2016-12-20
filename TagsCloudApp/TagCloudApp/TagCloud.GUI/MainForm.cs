@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using TagCloud.GUI.Extensions;
 using TagCloud.Settings;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.GUI
 {
@@ -76,12 +77,11 @@ namespace TagCloud.GUI
 
         public void Render()
         {
-            var bitmap = creator.Render();
-            pictureBox.Image = bitmap;
-            if (bitmap != null)
-            {
-                pictureBox.Size = bitmap.Size;
-            }
+            pictureBox.Image = null;
+            creator
+                .Render()
+                .Execute(b => pictureBox.Image = b)
+                .Execute(b => pictureBox.Size = b.Size);   
             pictureBox.Refresh();
             HasUnapplayedChanges = false;
         }

@@ -5,6 +5,8 @@ using TagCloud.Core.Layouter;
 using TagCloud.Settings;
 using Utility;
 using Utility.Geometry;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Layouter
 {
@@ -29,8 +31,10 @@ namespace TagCloud.Layouter
             spots = new HashSet<Vector>();
         }
 
-        public Rectangle PutNextSize(Size rectangleSize)
+        public Result<Rectangle> PutNextSize(Result<Size> size)
         {
+            if (size.IsFail) return Result<Rectangle>.Fail(size.Exception);
+            var rectangleSize = size.GetValueOrThrow();
             var rect = Rectangle.FromCentre(Centre, rectangleSize);
             if (rectangles.Any())
             {
@@ -49,7 +53,7 @@ namespace TagCloud.Layouter
             spots.Add(rect.LeftTop);
             spots.Add(rect.RightBottom);
 
-            return rect;
+            return Result<Rectangle>.Success(rect);
         }
         private Rectangle TryInsert(Size size)
         {

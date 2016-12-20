@@ -1,23 +1,29 @@
 ﻿using TagCloud.Core.Layouter;
 using TagCloud.Settings;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Layouter
 {
     public class AdaptiveHeightExtractor : IHeightExtractor
     {
         private readonly int minCharHeight;
-        private readonly double heightPerFrequence;
+        private readonly Result<double> heightPerFrequence;
 
         public AdaptiveHeightExtractor(TagCollection tagCollection, LayouterSettings settings)
         {
             minCharHeight = settings.MinCharHeight;
-            var delta = tagCollection.MaxFrequence - tagCollection.MinFrequence;
+            var delta = tagCollection.MaxFrequence.And(tagCollection.MinFrequence, (a, i) => a - i);
             var hdelta = settings.MaxCharHeight - settings.MinCharHeight;
-            heightPerFrequence = 1.0*hdelta/delta;
+            heightPerFrequence = delta.Select(d => 1.0*hdelta/d);
         }
-        public int ExtractHeight(int frequence)
+
+        //TODO: стоит оборачивать в TryCatch??? (и во всех подобных местах)
+        public Result<int> ExtractHeight(Result<int> frequence)
         {
-            return minCharHeight + (int)(heightPerFrequence*frequence);
+            return heightPerFrequence
+                .And(frequence, (h, f) => (int) (h*f))
+                .Select(s => minCharHeight + s);
         }
     }
 }

@@ -1,7 +1,9 @@
+using Utility.RailwayExceptions;
+
 namespace TagCloud.Core.Source
 {
     public interface IFileWordsSource : IWordsSource
     {
-        bool IsCanRead();
+        Result<bool> IsCanRead();
     }
 }

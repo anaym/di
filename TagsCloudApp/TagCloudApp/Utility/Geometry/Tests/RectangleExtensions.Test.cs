@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Utility.Geometry.Extensions;
+using Utility.RailwayExceptions;
 
 namespace Utility.Geometry.Tests
 {
@@ -20,14 +21,14 @@ namespace Utility.Geometry.Tests
         [Test]
         public void CoverAllRectangles()
         {
-            var coveringRectangle = rectangles.CoveringRectangle();
+            var coveringRectangle = rectangles.Select(Result.Success).CoveringRectangle();
             rectangles.Count(r => !coveringRectangle.Contains(r)).Should().Be(0);
         }
 
         [Test]
         public void BeEmpty_ForZeroRectangles()
         {
-            var coveringRectangle = Enumerable.Empty<Rectangle>().CoveringRectangle();
+            var coveringRectangle = Enumerable.Empty<Result<Rectangle>>().CoveringRectangle();
             coveringRectangle.Should().Be(Rectangle.Empty);
         }
     }

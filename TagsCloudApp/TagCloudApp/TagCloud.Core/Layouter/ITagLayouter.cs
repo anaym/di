@@ -1,9 +1,10 @@
 ﻿using Utility.Geometry;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.Core.Layouter
 {
     public interface ITagLayouter
     {
-        Rectangle PutNextTag(string tag, int frequence);
+        Result<Rectangle> PutNextTag(Result<string> tag, Result<int> frequence);
     }
 }

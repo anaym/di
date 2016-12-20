@@ -67,6 +67,10 @@
       <Project>{b32edd23-dd36-4eaa-9b4b-a051d178806b}</Project>
       <Name>TagCloud</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{03cc6366-6d93-4b58-bfdc-bfda5aad222b}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

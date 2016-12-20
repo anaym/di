@@ -5,6 +5,8 @@ using TagCloud.Core.Extensions;
 using TagCloud.Core.Layouter;
 using TagCloud.Core.Renderer;
 using TagCloud.Core.Source;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud
 {
@@ -27,14 +29,12 @@ namespace TagCloud
         {
             try
             {
-                foreach (var source in sources)
-                {
-                    if (source.IsCanRead())
-                    {
-                        collection.Clear();
-                        collection.AddAnyWords(source.GetWords().ToList());
-                        return true;
-                    }
+                //TODO: упростить
+                foreach (var source in sources.Where(s => s.IsCanRead().Validate().IsSuccess))
+                { 
+                    collection.Clear();
+                    collection.AddAnyWords(source.GetWords().GetValueOrThrow().Select(Result.Success));
+                    return true;
                 }
             }
             catch (Exception)
@@ -43,7 +43,7 @@ namespace TagCloud
             return false;
         }
 
-        public Bitmap Render()
+        public Result<Bitmap> Render()
         {
             var rectangles = layouterFactory().PutManyTags(collection.GetTags());
             return rendererFactory().Render(rectangles);

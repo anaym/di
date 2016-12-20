@@ -1,9 +1,10 @@
 ﻿using Utility.Geometry;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.Core.Layouter
 {
     public interface ISizeLayouter
     {
-        Rectangle PutNextSize(Size size);
+        Result<Rectangle> PutNextSize(Result<Size> size);
     }
 }

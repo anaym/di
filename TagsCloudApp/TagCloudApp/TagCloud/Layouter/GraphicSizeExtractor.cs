@@ -2,6 +2,8 @@
 using System.Drawing;
 using TagCloud.Core.Layouter;
 using Utility.Geometry.Extensions;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 using Size = Utility.Geometry.Size;
 
 namespace TagCloud.Layouter
@@ -19,10 +21,10 @@ namespace TagCloud.Layouter
             this.heightExtractor = heightExtractor;
         }
 
-        public Size ExtractSize(string word, int frequency)
+        public Result<Size> ExtractSize(Result<string> word, Result<int> frequency)
         {
             var height = heightExtractor.ExtractHeight(frequency);
-            return graphic.MeasureString(word, new Font(FontFamily.GenericMonospace, height)).ToGeometrySize();
+            return word.And(height, (w, h) => graphic.MeasureString(w, new Font(FontFamily.GenericMonospace, h)).ToGeometrySize());
         }
 
         public void Dispose()

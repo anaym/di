@@ -1,12 +1,13 @@
 ﻿using TagCloud.Core.Source;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.Source
 {
     public class AllTagFilter : ITagFilter
     {
-        public bool IsCollectableTag(string tag)
+        public Result<bool> IsCollectableTag(Result<string> tag)
         {
-            return true;
+            return Result.Success(true);
         }
     }
 }

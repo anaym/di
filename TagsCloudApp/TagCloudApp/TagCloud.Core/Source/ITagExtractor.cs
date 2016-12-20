@@ -1,7 +1,9 @@
-﻿namespace TagCloud.Core.Source
+﻿using Utility.RailwayExceptions;
+
+namespace TagCloud.Core.Source
 {
     public interface ITagExtractor
     {
-        string ExtractTag(string word);
+        Result<string> ExtractTag(Result<string> word);
     }
 }

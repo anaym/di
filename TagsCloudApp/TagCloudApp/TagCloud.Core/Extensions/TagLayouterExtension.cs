@@ -2,19 +2,21 @@
 using System.Linq;
 using TagCloud.Core.Layouter;
 using Utility.Geometry;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Core.Extensions
 {
     public static class TagLayouterExtension
     {
-        public static Rectangle PutNextTag(this ITagLayouter layouter, KeyValuePair<string, int> tagToFrequence)
+        public static Result<Rectangle> PutNextTag(this ITagLayouter layouter, Result<KeyValuePair<string, int>> tagToFrequence)
         {
-            return layouter.PutNextTag(tagToFrequence.Key, tagToFrequence.Value);
+            return layouter.PutNextTag(tagToFrequence.Select(t => t.Key), tagToFrequence.Select(t => t.Value));
         }
 
-        public static IReadOnlyDictionary<string, Rectangle> PutManyTags(this ITagLayouter layouter, IReadOnlyDictionary<string, int> tags)
+        public static IReadOnlyDictionary<Result<string>, Result<Rectangle>> PutManyTags(this ITagLayouter layouter, IReadOnlyDictionary<Result<string>, Result<int>> tags)
         {
-            return tags.ToDictionary(p => p.Key, layouter.PutNextTag);
+            return tags.ToDictionary(p => p.Key, p => layouter.PutNextTag(p.Key, p.Value));
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace TagCloud.Core.Source
+﻿using Utility.RailwayExceptions;
+
+namespace TagCloud.Core.Source
 {
     public interface ITagFilter
     {
-        bool IsCollectableTag(string tag);
+        Result<bool> IsCollectableTag(Result<string> tag);
     }
 }

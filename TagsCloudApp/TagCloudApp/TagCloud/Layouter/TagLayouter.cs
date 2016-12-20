@@ -1,5 +1,7 @@
 ﻿using TagCloud.Core.Layouter;
 using Utility.Geometry;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Layouter
 {
@@ -14,10 +16,9 @@ namespace TagCloud.Layouter
             this.sizeExtractor = sizeExtractor;
         }
 
-        public Rectangle PutNextTag(string tag, int frequence)
+        public Result<Rectangle> PutNextTag(Result<string> tag, Result<int> frequence)
         {
-            var size = sizeExtractor.ExtractSize(tag, frequence);
-            return sizeLayouter.PutNextSize(size);
+            return sizeLayouter.PutNextSize(sizeExtractor.ExtractSize(tag, frequence));
         }
     }
 }
