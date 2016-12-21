@@ -1,9 +1,12 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using TagCloud.GUI.Extensions;
 using TagCloud.Settings;
+using Utility.RailwayExceptions;
 using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.GUI
@@ -54,15 +57,9 @@ namespace TagCloud.GUI
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 loaderSettings.FileInfo = new FileInfo(dialog.FileName);
-                if (creator.Load())
-                {
-                    HasUnapplayedChanges = true;
-                    DocumentFileName = loaderSettings.FileInfo.Name;
-                }
-                else
-                {
-                    MessageBox.Show("Can`t load file!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                creator.Load().OnAnyErrorNotify();
+                HasUnapplayedChanges = true;
+                DocumentFileName = loaderSettings.FileInfo.Name;
             }
         }
 
@@ -71,7 +68,10 @@ namespace TagCloud.GUI
             var dialog = new SaveFileDialog {CheckPathExists = true, DefaultExt = ".png", Filter = "Image |.png"};
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox.Image.Save(dialog.FileName, ImageFormat.Png);
+                Result
+                    .Of(() => pictureBox.Image.Save(dialog.FileName, ImageFormat.Png))
+                    .RefineError("Save error")
+                    .OnErrorNotify();
             }
         }
 
@@ -81,7 +81,9 @@ namespace TagCloud.GUI
             creator
                 .Render()
                 .Execute(b => pictureBox.Image = b)
-                .Execute(b => pictureBox.Size = b.Size);   
+                .Execute(b => pictureBox.Size = b.Size)
+                .RefineError("Render error")
+                .OnErrorNotify();   
             pictureBox.Refresh();
             HasUnapplayedChanges = false;
         }

@@ -21,14 +21,14 @@ namespace Utility.Geometry.Tests
         [Test]
         public void CoverAllRectangles()
         {
-            var coveringRectangle = rectangles.Select(Result.Success).CoveringRectangle();
+            var coveringRectangle = rectangles.CoveringRectangle();
             rectangles.Count(r => !coveringRectangle.Contains(r)).Should().Be(0);
         }
 
         [Test]
         public void BeEmpty_ForZeroRectangles()
         {
-            var coveringRectangle = Enumerable.Empty<Result<Rectangle>>().CoveringRectangle();
+            var coveringRectangle = Enumerable.Empty<Rectangle>().CoveringRectangle();
             coveringRectangle.Should().Be(Rectangle.Empty);
         }
     }

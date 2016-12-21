@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TagCloud.Core.Extensions;
@@ -15,9 +16,9 @@ namespace TagCloud
         private readonly Func<ITagLayouter> layouterFactory;
         private readonly Func<ITagCloudRenderer> rendererFactory;
         private readonly TagCollection collection;
-        private readonly IFileWordsSource[] sources;
+        private readonly IWordsSource[] sources;
 
-        public TagCloudCreator(TagCollection collection, IFileWordsSource[] sources, Func<ITagCloudRenderer> rendererFactory, Func<ITagLayouter> layouterFactory)
+        public TagCloudCreator(TagCollection collection, IWordsSource[] sources, Func<ITagCloudRenderer> rendererFactory, Func<ITagLayouter> layouterFactory)
         {
             this.collection = collection;
             this.sources = sources;
@@ -25,22 +26,21 @@ namespace TagCloud
             this.layouterFactory = layouterFactory;
         }
 
-        public bool Load()
+        public List<Result<None>> Load()
         {
-            try
+            var results = new List<Result<None>>();
+            foreach (var source in sources)
             {
-                //TODO: упростить
-                foreach (var source in sources.Where(s => s.IsCanRead().Validate().IsSuccess))
-                { 
+                var words = source.GetWords();
+                results.Add(words.IgnoreValue().RefineError("Load error"));
+                if (words.IsSuccess)
+                {
                     collection.Clear();
                     collection.AddAnyWords(source.GetWords().GetValueOrThrow().Select(Result.Success));
-                    return true;
+                    break;
                 }
             }
-            catch (Exception)
-            {
-            }
-            return false;
+            return results;
         }
 
         public Result<Bitmap> Render()

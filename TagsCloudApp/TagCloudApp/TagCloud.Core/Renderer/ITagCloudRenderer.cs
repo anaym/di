@@ -7,7 +7,7 @@ namespace TagCloud.Core.Renderer
 {
     public interface ITagCloudRenderer
     {
-        Result<Rectangle> GetCoverageRectangle(IReadOnlyDictionary<Result<string>, Result<Rectangle>> tags);
-        Result<None> Render(Result<Graphics> graphics, IReadOnlyDictionary<Result<string>, Result<Rectangle>> tags);
+        Result<Rectangle> GetCoverageRectangle(Result<IReadOnlyDictionary<string, Rectangle>> tags);
+        Result<None> Render(Result<Graphics> graphics, Result<IReadOnlyDictionary<string, Rectangle>> tags);
     }
 }

@@ -48,7 +48,6 @@
     <Compile Include="Extensions\TagLayouterExtension.cs" />
     <Compile Include="Renderer\ITagCloudRenderer.cs" />
     <Compile Include="Extensions\TagCloudRendererExtension.cs" />
-    <Compile Include="Source\IFileWordsSource.cs" />
     <Compile Include="Source\ITagExtractor.cs" />
     <Compile Include="Source\ITagFilter.cs" />
     <Compile Include="Layouter\ITagLayouter.cs" />

@@ -28,39 +28,44 @@ namespace TagCloud.Renderer
             };
         }
 
-        public Result<Rectangle> GetCoverageRectangle(IReadOnlyDictionary<Result<string>, Result<Rectangle>> tags)
+        public Result<Rectangle> GetCoverageRectangle(Result<IReadOnlyDictionary<string, Rectangle>> tags)
         {
-            return Result.Success(tags.Values.CoveringRectangle() * settings.Scale);
+            return tags.Select(t=> t.Values.CoveringRectangle() * settings.Scale);
         }
 
-        public Result<None> Render(Result<Graphics> graphics, IReadOnlyDictionary<Result<string>, Result<Rectangle>> tags)
+        public Result<None> Render(Result<Graphics> graphics, Result<IReadOnlyDictionary<string, Rectangle>> tags)
         {
-            if (graphics.IsFail) return Result.Fail(graphics.Exception).RefineException("Render error");
+            if (graphics.IsFail) return Result.Fail(graphics.Error).RefineError("Render error");
             var coverigRectangle = GetCoverageRectangle(tags);
-            if (coverigRectangle.IsFail) return Result.Fail(coverigRectangle.Exception).RefineException("Render error");
+            if (coverigRectangle.IsFail) return Result.Fail(coverigRectangle.Error).RefineError("Render error");
             var transform = new VectorCoordinateSystemConverter(coverigRectangle.GetValueOrThrow());
             var scale = settings.Scale;
             var graph = graphics.GetValueOrThrow();
             if (settings.ShowRectangles)
             {
-                foreach (var rectangle in tags.Values.GetSuccesful())
-                {
-                    var rectF = transform.Transform(rectangle*scale);
-                    graph.FillRectangle(new SolidBrush(rectangle.Size.ToColor()), rectF);
-                    graph.DrawRectangle(new Pen(Color.GreenYellow), rectF.X, rectF.Y, rectF.Width, rectF.Height);
-
-                }
+                RenderRectangles(graph, tags.GetValueOrThrow(), scale, transform);
             }
             var rnd = new Random();
             var textBrushes = settings.TextColors.Select(c => new SolidBrush(c)).ToList();
             var font = new Font(new FontFamily(settings.Font), 128);
-            foreach (var tag in tags.GetSuccesful())
+            foreach (var tag in tags.GetValueOrThrow())
             {
                 var rectF = transform.Transform(tag.Value*scale);
                 graph.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 var goodFont = FindFont(graph, tag.Key, rectF.Size, font);
                 var textBrush = textBrushes[rnd.Next(textBrushes.Count)];
                 graph.DrawString(tag.Key, goodFont, textBrush, rectF, stringFormat);
+            }
+            return Result.Success();
+        }
+
+        private Result<None> RenderRectangles(Graphics graph, IReadOnlyDictionary<string, Rectangle> tags, int scale, VectorCoordinateSystemConverter transform)
+        {
+            foreach (var rectangle in tags.Values)
+            {
+                var rectF = transform.Transform(rectangle * scale);
+                graph.FillRectangle(new SolidBrush(rectangle.Size.ToColor()), rectF);
+                graph.DrawRectangle(new Pen(Color.GreenYellow), rectF.X, rectF.Y, rectF.Width, rectF.Height);
             }
             return Result.Success();
         }

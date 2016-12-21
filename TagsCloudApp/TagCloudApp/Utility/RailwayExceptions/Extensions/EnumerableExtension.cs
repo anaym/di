@@ -27,5 +27,10 @@ namespace Utility.RailwayExceptions.Extensions
         {
             return results.Where(IsSuccess).Select(GetValueOrThrow);
         }
+
+        public static Result<IEnumerable<T>> AllSuccess<T>(this IEnumerable<Result<T>> results)
+        {
+            return Result.Of(() => results.Select(r => r.GetValueOrThrow()), "Not all success");
+        }
     }
 }

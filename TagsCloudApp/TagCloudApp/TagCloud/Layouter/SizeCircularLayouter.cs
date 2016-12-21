@@ -33,7 +33,7 @@ namespace TagCloud.Layouter
 
         public Result<Rectangle> PutNextSize(Result<Size> size)
         {
-            if (size.IsFail) return Result<Rectangle>.Fail(size.Exception);
+            if (size.IsFail) return Result<Rectangle>.Fail(size.Error);
             var rectangleSize = size.GetValueOrThrow();
             var rect = Rectangle.FromCentre(Centre, rectangleSize);
             if (rectangles.Any())

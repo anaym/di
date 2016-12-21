@@ -13,7 +13,7 @@ namespace TagCloud.GUI.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AdaptiveHeightExtractor>().As<IHeightExtractor>();
-            builder.RegisterType<TxtFileWordsSource>().As<IFileWordsSource>();
+            builder.RegisterType<TxtFileWordsSource>().As<IWordsSource>();
             builder.RegisterType<LowCaseTagExtractor>().As<ITagExtractor>();
             builder.RegisterType<AllTagFilter>().As<ITagFilter>();
             builder.RegisterType<GraphicSizeExtractor>().As<ISizeExtractor>();

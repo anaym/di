@@ -8,14 +8,14 @@ namespace Utility.Geometry.Extensions
 {
     public static class CoveringRectangleExtension
     {
-        public static Rectangle CoveringRectangle(this IEnumerable<Result<Rectangle>> rectangles)
+        public static Rectangle CoveringRectangle(this IEnumerable<Rectangle> rectangles)
         {
             var minX = int.MaxValue;
             var maxX = int.MinValue;
             var minY = int.MaxValue;
             var maxY = int.MinValue;
             var exists = false;
-            foreach (var rectangle in rectangles.GetSuccesful())
+            foreach (var rectangle in rectangles)
             {
                 exists = true;
                 minX = Math.Min(rectangle.Left, minX);

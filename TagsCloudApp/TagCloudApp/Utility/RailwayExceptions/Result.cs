@@ -6,23 +6,23 @@ namespace Utility.RailwayExceptions
     {
         private T Value { get; }
         public bool IsSuccess { get; }
-        public string Exception { get; }
+        public string Error { get; }
         public bool IsFail => !IsSuccess;
 
         public static Result<T> Success(T value) => new Result<T>(value, true, null);
         public static Result<T> Fail(string exception) => new Result<T>(default(T), false, exception);
 
 
-        private Result(T value, bool isSuccess, string exception)
+        private Result(T value, bool isSuccess, string error)
         {
             Value = value;
             IsSuccess = isSuccess;
-            Exception = exception;
+            Error = error;
         }
 
         public T GetValueOrThrow()
         {
-            if (IsFail) throw new InvalidOperationException($"No value. Only exception: {Exception}");
+            if (IsFail) throw new InvalidOperationException($"No value. Only error: {Error}");
             return Value;
         }
 

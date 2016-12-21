@@ -5,6 +5,6 @@ namespace TagCloud.Core.Layouter
 {
     public interface ITagLayouter
     {
-        Result<Rectangle> PutNextTag(Result<string> tag, Result<int> frequence);
+        Result<Rectangle> PutNextTag(string tag, int frequence);
     }
 }

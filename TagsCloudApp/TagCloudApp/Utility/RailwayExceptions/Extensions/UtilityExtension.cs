@@ -6,7 +6,7 @@ namespace Utility.RailwayExceptions.Extensions
     {
         public static Result<T> Unpack<T>(this Result<Result<T>> result)
         {
-            return result.IsFail ? Result<T>.Fail(result.Exception) : result.GetValueOrThrow();
+            return result.IsFail ? Result<T>.Fail(result.Error) : result.GetValueOrThrow();
         }
 
         public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> validator, string exception = null)
@@ -15,5 +15,10 @@ namespace Utility.RailwayExceptions.Extensions
         }
 
         public static Result<bool> Validate(this Result<bool> result) => result.Validate(r => r);
+
+        public static Result<None> IgnoreValue<T>(this Result<T> result)
+        {
+            return result.Select(v => new None());
+        }
     }
 }
