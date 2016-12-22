@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Utility.RailwayExceptions;
-using Utility.RailwayExceptions.Extensions;
 
 namespace Utility.Geometry.Extensions
 {

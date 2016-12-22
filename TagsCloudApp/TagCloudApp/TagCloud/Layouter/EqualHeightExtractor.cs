@@ -5,9 +5,9 @@ namespace TagCloud.Layouter
 {
     public class EqualHeightExtractor : IHeightExtractor
     {
-        public Result<int> ExtractHeight(Result<int> frequence)
+        public Result<int> ExtractHeight(int frequence)
         {
-            return frequence;
+            return Result.Success(frequence);
         }
     }
 }

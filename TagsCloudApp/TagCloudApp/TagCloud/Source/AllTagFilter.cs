@@ -5,7 +5,7 @@ namespace TagCloud.Source
 {
     public class AllTagFilter : ITagFilter
     {
-        public Result<bool> IsCollectableTag(Result<string> tag)
+        public Result<bool> IsCollectableTag(string tag)
         {
             return Result.Success(true);
         }

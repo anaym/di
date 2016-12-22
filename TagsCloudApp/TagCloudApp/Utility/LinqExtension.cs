@@ -31,38 +31,5 @@ namespace Utility
         {
             return seq.Where(i => !validator(i));
         }
-
-        public static IEnumerable<T> Any<T>(this IEnumerable<T> seq, Func<T, bool> comparer, out bool isAny)
-        {
-            var any = false;
-            seq = seq.Parallell(i => any = comparer(i));
-            isAny = any;
-            return seq;
-        }
-
-        public static IEnumerable<T> All<T>(this IEnumerable<T> seq, Func<T, bool> comparer, out bool isAll)
-        {
-            var notAll = false;
-            seq = seq.Parallell(i => notAll = !comparer(i));
-            isAll = !notAll;
-            return seq;
-        }
-
-        public static IEnumerable<T> Parallell<T>(this IEnumerable<T> seq, Action<T> action)
-        {
-            var enumerator = seq.GetEnumerator();
-            T current = default(T);
-            Func<bool> next = () =>
-            {
-                if (enumerator.MoveNext())
-                {
-                    current = enumerator.Current;
-                    action(current);
-                    return true;
-                }
-                return false;
-            };
-            return new QuickEnumerator<T>(next, () => current).ToEnumerable();
-        }
     }
 }

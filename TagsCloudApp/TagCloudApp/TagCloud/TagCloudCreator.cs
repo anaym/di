@@ -36,7 +36,7 @@ namespace TagCloud
                 if (words.IsSuccess)
                 {
                     collection.Clear();
-                    collection.AddAnyWords(source.GetWords().GetValueOrThrow().Select(Result.Success));
+                    collection.AddAnyWords(source.GetWords().GetValueOrThrow());
                     break;
                 }
             }
@@ -45,8 +45,9 @@ namespace TagCloud
 
         public Result<Bitmap> Render()
         {
-            var rectangles = layouterFactory().PutManyTags(collection.GetTags());
-            return rendererFactory().Render(rectangles);
+            return layouterFactory()
+                .PutManyTags(collection.GetTags())
+                .Select(r => rendererFactory().Render(r)).Unpack();
         }
     }
 }

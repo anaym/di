@@ -4,6 +4,6 @@ namespace TagCloud.Core.Layouter
 {
     public interface IHeightExtractor
     {
-        Result<int> ExtractHeight(Result<int> frequence);
+        Result<int> ExtractHeight(int frequence);
     }
 }

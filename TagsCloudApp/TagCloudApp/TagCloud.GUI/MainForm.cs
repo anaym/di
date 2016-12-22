@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using TagCloud.GUI.Extensions;
 using TagCloud.Settings;
@@ -57,9 +55,10 @@ namespace TagCloud.GUI
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 loaderSettings.FileInfo = new FileInfo(dialog.FileName);
-                creator.Load().OnAnyErrorNotify();
-                HasUnapplayedChanges = true;
-                DocumentFileName = loaderSettings.FileInfo.Name;
+                creator.Load()
+                    .OnAllErrorNotify()
+                    .Execute(() => HasUnapplayedChanges = true)
+                    .Execute(() => DocumentFileName = loaderSettings.FileInfo.Name);
             }
         }
 
@@ -83,9 +82,9 @@ namespace TagCloud.GUI
                 .Execute(b => pictureBox.Image = b)
                 .Execute(b => pictureBox.Size = b.Size)
                 .RefineError("Render error")
-                .OnErrorNotify();   
-            pictureBox.Refresh();
-            HasUnapplayedChanges = false;
+                .OnErrorNotify()
+                .Execute(() => pictureBox.Refresh())  
+                .Execute(() => HasUnapplayedChanges = false);   
         }
 
         public bool HasUnapplayedChanges { set { hasUnapplayedChanges = value; UpdateTitle(); } }

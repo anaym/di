@@ -5,9 +5,9 @@ namespace TagCloud.Source
 {
     public class EqualTagExtractor : ITagExtractor
     {
-        public Result<string> ExtractTag(Result<string> word)
+        public Result<string> ExtractTag(string word)
         {
-            return word;
+            return Result.Success(word);
         }
     }
 }

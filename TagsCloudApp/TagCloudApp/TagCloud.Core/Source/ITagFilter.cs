@@ -4,6 +4,6 @@ namespace TagCloud.Core.Source
 {
     public interface ITagFilter
     {
-        Result<bool> IsCollectableTag(Result<string> tag);
+        Result<bool> IsCollectableTag(string tag);
     }
 }

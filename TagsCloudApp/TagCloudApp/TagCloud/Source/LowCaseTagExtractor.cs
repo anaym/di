@@ -1,14 +1,13 @@
 ﻿using TagCloud.Core.Source;
 using Utility.RailwayExceptions;
-using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Source
 {
     public class LowCaseTagExtractor : ITagExtractor
     {
-        public Result<string> ExtractTag(Result<string> word)
+        public Result<string> ExtractTag(string word)
         {
-            return word.Select(w => w.ToLowerInvariant());
+            return Result.Of(() => word.ToLowerInvariant());
         }
     }
 }

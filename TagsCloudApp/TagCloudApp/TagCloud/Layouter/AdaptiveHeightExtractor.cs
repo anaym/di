@@ -13,16 +13,15 @@ namespace TagCloud.Layouter
         public AdaptiveHeightExtractor(TagCollection tagCollection, LayouterSettings settings)
         {
             minCharHeight = settings.MinCharHeight;
-            var delta = tagCollection.MaxFrequence.And(tagCollection.MinFrequence, (a, i) => a - i);
+            var delta = tagCollection.MaxFrequence - tagCollection.MinFrequence;
             var hdelta = settings.MaxCharHeight - settings.MinCharHeight;
-            heightPerFrequence = delta.Select(d => 1.0*hdelta/d);
+            heightPerFrequence = Result.Of(() => 1.0*hdelta/delta);
         }
 
-        //TODO: стоит оборачивать в TryCatch??? (и во всех подобных местах)
-        public Result<int> ExtractHeight(Result<int> frequence)
+        public Result<int> ExtractHeight(int frequence)
         {
             return heightPerFrequence
-                .And(frequence, (h, f) => (int) (h*f))
+                .Select(h => (int) (h*frequence))
                 .Select(s => minCharHeight + s);
         }
     }

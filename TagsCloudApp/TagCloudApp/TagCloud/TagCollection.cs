@@ -11,43 +11,46 @@ namespace TagCloud
     {
         private readonly ITagExtractor extractor;
         private readonly ITagFilter[] filters;
-        private readonly Dictionary<Result<string>, Result<int>> tags;
+        private readonly Dictionary<string, int> tags;
 
         public TagCollection(ITagExtractor extractor, ITagFilter[] filters)
         {
             this.extractor = extractor;
             this.filters = filters;
-            tags = new Dictionary<Result<string>, Result<int>>();
+            tags = new Dictionary<string, int>();
         }
+
+        public int MinFrequence => tags.Count == 0 ? 0 : tags.Min(t => t.Value);
+        public int MaxFrequence => tags.Count == 0 ? 0 : tags.Max(t => t.Value);
+
+        public IReadOnlyDictionary<string, int> GetTags() => tags.OrderByDescending(p => p.Value).ToDictionary();
 
         public void Clear() => tags.Clear();
 
         public void AddWord(string word, int count = 1)
         {
-            var tag = extractor.ExtractTag(Result<string>.Success(word));
-            if (tag.IsFail) return;
-            if (tags.ContainsKey(tag))
-            {
-                tags[tag] = tags[tag].Select(r => r + count);
-            }
-            else if (filters.All(f => f.IsCollectableTag(tag).Validate().IsSuccess))
-            {
-                tags.Add(tag, Result.Success(count));
-            }
+            extractor.ExtractTag(word).Select(t => AddTag(t, count));   
         }
 
-        public void AddAnyWords(IEnumerable<Result<string>> words)
+        public void AddAnyWords(IEnumerable<string> words)
         {
-            foreach (var word in words.GetSuccesful())
+            foreach (var word in words)
             {
                 AddWord(word);
             }
         }
 
-        public Result<int> MinFrequence => tags.Count == 0 ? Result.Success(0) : Result.Of(() => tags.GetSuccesful().Min(t => t.Value));
-        public Result<int> MaxFrequence => tags.Count == 0 ? Result.Success(0) : Result.Of(() => tags.GetSuccesful().Max(t => t.Value));
-
-        public IReadOnlyDictionary<Result<string>, Result<int>> GetTags() => tags.Where(p => p.IsSuccess()).OrderByDescending(p => p.GetValueOrThrow().Value).ToDictionary();
+        private void AddTag(string tag, int count)
+        {
+            if (tags.ContainsKey(tag))
+            {
+                tags[tag] += count;
+            }
+            else if (filters.All(f => f.IsCollectableTag(tag).Validate().IsSuccess))
+            {
+                tags.Add(tag, count);
+            }
+        }
     }
 
 }

@@ -21,10 +21,14 @@ namespace TagCloud.Layouter
             this.heightExtractor = heightExtractor;
         }
 
-        public Result<Size> ExtractSize(Result<string> word, Result<int> frequency)
+        public Result<Size> ExtractSize(string word, int frequency)
         {
-            var height = heightExtractor.ExtractHeight(frequency);
-            return word.And(height, (w, h) => graphic.MeasureString(w, new Font(FontFamily.GenericMonospace, h)).ToGeometrySize());
+            return heightExtractor
+                .ExtractHeight(frequency)
+                .Select(h => new Font(FontFamily.GenericMonospace, h))
+                .Select(font => graphic.MeasureString(word, font))
+                .Select(s => s.ToGeometrySize())
+                .RefineError("Size extract error");
         }
 
         public void Dispose()

@@ -4,6 +4,6 @@ namespace TagCloud.Core.Source
 {
     public interface ITagExtractor
     {
-        Result<string> ExtractTag(Result<string> word);
+        Result<string> ExtractTag(string word);
     }
 }

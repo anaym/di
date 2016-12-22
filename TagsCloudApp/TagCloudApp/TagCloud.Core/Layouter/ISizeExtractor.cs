@@ -5,6 +5,6 @@ namespace TagCloud.Core.Layouter
 {
     public interface ISizeExtractor
     {
-        Result<Size> ExtractSize(Result<string> word, Result<int> frequency);
+        Result<Size> ExtractSize(string word, int frequency);
     }
 }

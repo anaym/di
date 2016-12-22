@@ -16,9 +16,11 @@ namespace TagCloud.Layouter
             this.sizeExtractor = sizeExtractor;
         }
 
-        public Result<Rectangle> PutNextTag(Result<string> tag, Result<int> frequence)
+        public Result<Rectangle> PutNextTag(string tag, int frequence)
         {
-            return sizeLayouter.PutNextSize(sizeExtractor.ExtractSize(tag, frequence));
+            return sizeExtractor
+                .ExtractSize(tag, frequence)
+                .Select(sizeLayouter.PutNextSize).Unpack();
         }
     }
 }

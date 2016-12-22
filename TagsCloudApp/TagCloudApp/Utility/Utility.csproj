@@ -71,11 +71,7 @@
     <Compile Include="LazyHash.cs" />
     <Compile Include="LinqExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuickEnumerable.cs" />
-    <Compile Include="QuickEnumerator.cs" />
     <Compile Include="RailwayExceptions\Extensions\ExecuteExtension.cs" />
-    <Compile Include="RailwayExceptions\Extensions\EnumerableExtension.cs" />
-    <Compile Include="RailwayExceptions\Extensions\LogicExtension.cs" />
     <Compile Include="RailwayExceptions\Extensions\UtilityExtension.cs" />
     <Compile Include="RailwayExceptions\None.cs" />
     <Compile Include="RailwayExceptions\Result.cs" />

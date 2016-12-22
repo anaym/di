@@ -9,10 +9,11 @@ namespace TagCloud.Core.Extensions
 {
     public static class TagLayouterExtension
     {
-        public static Result<IReadOnlyDictionary<string, Rectangle>> PutManyTags(this ITagLayouter layouter, Result<IReadOnlyDictionary<string, int>> tags)
+        public static Result<IReadOnlyDictionary<string, Rectangle>> PutManyTags(this ITagLayouter layouter, IReadOnlyDictionary<string, int> tags)
         {
-            return tags.Select(t => t
-                .Select(p => new KeyValuePair<string, Result<Rectangle>>(p.Key, layouter.PutNextTag(p.Key, p.Value)));
+            return Result
+                .Of(() => tags.ToDictionary(p => p.Key, p => layouter.PutNextTag(p.Key, p.Value).GetValueOrThrow()))
+                .Cast<Dictionary<string, Rectangle>, IReadOnlyDictionary<string, Rectangle>>();
         }
     }
 }

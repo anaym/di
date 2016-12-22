@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Utility.Geometry.Extensions;
-using Utility.RailwayExceptions;
 
 namespace Utility.Geometry.Tests
 {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using TagCloud.GUI.Modules;
 
@@ -8,7 +10,7 @@ namespace TagCloud.GUI
     {
         [STAThread]
         static void Main(string[] args)
-        {
+        { 
             var builder = new ContainerBuilder();
             builder.RegisterModule<InfrastructureModule>();
             builder.RegisterModule<TagCloudModule>();

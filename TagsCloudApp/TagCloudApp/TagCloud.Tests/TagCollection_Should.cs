@@ -4,7 +4,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using TagCloud.Core.Source;
 using Utility.RailwayExceptions;
-using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.Tests
 {

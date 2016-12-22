@@ -5,6 +5,6 @@ namespace TagCloud.Core.Layouter
 {
     public interface ISizeLayouter
     {
-        Result<Rectangle> PutNextSize(Result<Size> size);
+        Result<Rectangle> PutNextSize(Size size);
     }
 }
