@@ -13,7 +13,7 @@ namespace TagCloud.Layouter
             minCharHeight = settings.MinCharHeight;
             var delta = tagCollection.MaxFrequence - tagCollection.MinFrequence;
             var hdelta = settings.MaxCharHeight - settings.MinCharHeight;
-            heightPerFrequence = 1.0*hdelta/delta;
+            heightPerFrequence = delta == 0 ? 1 : 1.0*hdelta/delta;
         }
         public int ExtractHeight(int frequence)
         {
