@@ -11,6 +11,7 @@ namespace TagCloud.GUI.Modules
             builder.RegisterType<LoaderSettings>().AsSelf().As<ISettings>().SingleInstance();
             builder.RegisterType<LayouterSettings>().AsSelf().As<ISettings>().SingleInstance();
             builder.RegisterType<RendererSettings>().AsSelf().As<ISettings>().SingleInstance();
+            builder.RegisterType<CreatorSettings>().AsSelf().As<ISettings>().SingleInstance();
             builder.RegisterType<TagCollection>().AsSelf().SingleInstance();
             builder.RegisterType<TagCloudCreator>().AsSelf();
             builder.RegisterType<MainForm>().AsSelf();

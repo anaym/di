@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\RendererSettings.cs" />
     <Compile Include="Renderer\TagCloudRenderer.cs" />
+    <Compile Include="Settings\CreatorSettings.cs" />
     <Compile Include="Source\AllTagFilter.cs" />
     <Compile Include="Source\EqualTagExtractor.cs" />
     <Compile Include="Settings\LoaderSettings.cs" />
