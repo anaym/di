@@ -6,7 +6,11 @@ namespace Utility.RailwayExceptions
     {
         private T Value { get; }
         public bool IsSuccess { get; }
+        // CR: This is neither error nor exceptions.
+        // This is error message. Name it accordingly,
+        // or make it an exception.
         public string Error { get; }
+        // CR: Should be moved to an extension
         public bool IsFail => !IsSuccess;
 
         public static Result<T> Success(T value) => new Result<T>(value, true, null);
@@ -20,12 +24,14 @@ namespace Utility.RailwayExceptions
             Error = error;
         }
 
+        // CR: Should be moved to an extension
         public T GetValueOrThrow()
         {
             if (IsFail) throw new InvalidOperationException($"No value. Only error: {Error}");
             return Value;
         }
 
+        // CR: Should be moved to an extension
         public bool TryGetValue(out T value)
         {
             value = Value;
@@ -33,6 +39,8 @@ namespace Utility.RailwayExceptions
         }
     }
 
+    // CR: Should be deleted or renamed to be
+    // a helper class or reworked to be an extension class
     public static class Result
     {
         public static Result<T> Success<T>(T result) => Result<T>.Success(result);

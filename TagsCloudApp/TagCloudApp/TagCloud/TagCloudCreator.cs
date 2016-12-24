@@ -26,8 +26,12 @@ namespace TagCloud
             this.layouterFactory = layouterFactory;
         }
 
+        // CR: Loading words only from the first
+        // successfull source is EXTREMELY counterintuitive
         public List<Result<None>> Load()
         {
+            // CR: Compare to
+            // return sources.GetWords().Select(words => collection.AddAnyWords(words));
             var results = new List<Result<None>>();
             foreach (var source in sources)
             {
@@ -36,6 +40,8 @@ namespace TagCloud
                 if (words.IsSuccess)
                 {
                     collection.Clear();
+                    // CR: You're returning Result<T> AND throwing
+                    // Why bother using Result<T> then?
                     collection.AddAnyWords(source.GetWords().GetValueOrThrow());
                     break;
                 }

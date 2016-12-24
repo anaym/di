@@ -2,8 +2,10 @@
 
 namespace Utility.RailwayExceptions
 {
+    // CR: Should be removed
     public sealed class None { }
 
+    // CR: Same
     public static class FuncExtension
     {
         public static Func<None> ToFunc(this Action foo)

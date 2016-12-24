@@ -4,6 +4,7 @@ using Utility.RailwayExceptions;
 
 namespace TagCloud.Source
 {
+    // CR: Public test class in the exported library? Srsly?
     public class TestWordSource : IWordsSource
     {
         public Result<IEnumerable<string>> GetWords()

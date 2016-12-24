@@ -56,6 +56,7 @@ namespace TagCloud.Settings
                 }
                 catch (Exception)
                 {
+                    // CR: Why is it ignored?
                     // ignored
                 }
             }
