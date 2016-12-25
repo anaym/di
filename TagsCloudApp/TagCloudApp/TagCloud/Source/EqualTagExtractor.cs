@@ -7,7 +7,7 @@ namespace TagCloud.Source
     {
         public Result<string> ExtractTag(string word)
         {
-            return Result.Success(word);
+            return Results.Success(word);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace TagCloud.Layouter
 
         public Result<int> ExtractHeight(int frequence)
         {
-            return Result.Of(() => frequence*scale);
+            return Results.Of(() => frequence*scale);
         }
     }
 }

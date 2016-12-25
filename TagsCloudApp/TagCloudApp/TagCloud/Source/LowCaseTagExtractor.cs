@@ -7,7 +7,7 @@ namespace TagCloud.Source
     {
         public Result<string> ExtractTag(string word)
         {
-            return Result.Of(() => word.ToLowerInvariant());
+            return Results.Of(() => word.ToLowerInvariant());
         }
     }
 }

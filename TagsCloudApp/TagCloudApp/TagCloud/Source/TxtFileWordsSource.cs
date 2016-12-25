@@ -20,7 +20,7 @@ namespace TagCloud.Source
 
         public Result<IEnumerable<string>> GetWords()
         {
-            return Result
+            return Results
                 .Validate(settings.FileInfo, fi => fi.Extension == ".txt", "Not supported file format")
                 .Select(fi => File.ReadAllLines(fi.FullName, settings.Encoding))
                 .Select(lines => lines.SelectMany(l => l.Split(settings.Separators.ToArray())))

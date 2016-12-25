@@ -57,7 +57,6 @@
     <Compile Include="Source\EqualTagExtractor.cs" />
     <Compile Include="Settings\LoaderSettings.cs" />
     <Compile Include="Source\LowCaseTagExtractor.cs" />
-    <Compile Include="Source\TestWordSource.cs" />
     <Compile Include="Source\TxtFileWordsSource.cs" />
     <Compile Include="TagCloudCreator.cs" />
     <Compile Include="TagCollection.cs" />

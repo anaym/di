@@ -30,12 +30,12 @@ namespace TagCloud.Renderer
 
         public Result<Rectangle> GetCoverageRectangle(IReadOnlyDictionary<string, Rectangle> tags)
         {
-            return Result.Of(() => tags.Values.CoveringRectangle()*settings.Scale);
+            return Results.Of(() => tags.Values.CoveringRectangle()*settings.Scale);
         }
 
         public Result<None> Render(Graphics graph, IReadOnlyDictionary<string, Rectangle> tags)
         {
-            return Result.Of(() => RenderNonRailway(graph, tags)).RefineError("Render error");
+            return Results.Of(() => RenderNonRailway(graph, tags)).RefineException("Render error");
         }
 
         private void RenderNonRailway(Graphics graph, IReadOnlyDictionary<string, Rectangle> tags)

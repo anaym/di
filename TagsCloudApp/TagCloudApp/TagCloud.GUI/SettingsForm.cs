@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Utility.RailwayExceptions;
+using Utility.RailwayExceptions.Extensions;
 
 namespace TagCloud.GUI
 {
@@ -28,6 +30,11 @@ namespace TagCloud.GUI
                 Dock = DockStyle.Fill
             });
             AcceptButton = okButton;
+        }
+
+        public new Result<None> ShowDialog()
+        {
+            return Results.Of(base.ShowDialog).IgnoreValue();
         }
 
         protected override void OnLoad(EventArgs e)

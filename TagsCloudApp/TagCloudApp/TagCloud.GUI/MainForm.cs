@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using TagCloud.GUI.Extensions;
 using TagCloud.Settings;
@@ -42,6 +44,14 @@ namespace TagCloud.GUI
             DocumentFileName = "";
             HasUnapplayedChanges = false;
         }
+        
+        //TODO: it isn`t work?
+        static MainForm()
+        {
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            Application.ThreadException += (sender, args) => Results.Fail(args.Exception).OnExceptionNotify();
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => Results.Fail((Exception) args.ExceptionObject).OnExceptionNotify();
+        }
 
         public void Run()
         {
@@ -56,7 +66,7 @@ namespace TagCloud.GUI
             {
                 loaderSettings.FileInfo = new FileInfo(dialog.FileName);
                 creator.Load()
-                    .OnAllErrorNotify()
+                    .OnAllExceptionNotify()
                     .Execute(() => HasUnapplayedChanges = true)
                     .Execute(() => DocumentFileName = loaderSettings.FileInfo.Name);
             }
@@ -67,10 +77,10 @@ namespace TagCloud.GUI
             var dialog = new SaveFileDialog {CheckPathExists = true, DefaultExt = ".png", Filter = "Image |.png"};
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                Result
+                Results
                     .Of(() => pictureBox.Image.Save(dialog.FileName, ImageFormat.Png))
-                    .RefineError("Save error")
-                    .OnErrorNotify();
+                    .RefineException("Save error")
+                    .OnExceptionNotify();
             }
         }
 
@@ -81,8 +91,8 @@ namespace TagCloud.GUI
                 .Render()
                 .Execute(b => pictureBox.Image = b)
                 .Execute(b => pictureBox.Size = b.Size)
-                .RefineError("Render error")
-                .OnErrorNotify()
+                .RefineException("Render error")
+                .OnExceptionNotify()
                 .Execute(() => pictureBox.Refresh())  
                 .Execute(() => HasUnapplayedChanges = false);   
         }

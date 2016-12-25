@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TagCloud.Settings;
+using Utility.RailwayExceptions;
 
 namespace TagCloud.GUI.Extensions
 {
@@ -39,7 +40,7 @@ namespace TagCloud.GUI.Extensions
 
 	    public static void RequestSetup(this ISettings settings)
 	    {
-	        SettingsForm.For(settings).ShowDialog();
+	        SettingsForm.For(settings).ShowDialog().OnExceptionNotify();
 	    }
 	}
 }

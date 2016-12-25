@@ -7,7 +7,7 @@ namespace TagCloud.Source
     {
         public Result<bool> IsCollectableTag(string tag)
         {
-            return Result.Success(true);
+            return Results.Success(true);
         }
     }
 }

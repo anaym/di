@@ -48,18 +48,7 @@ namespace TagCloud.Settings
         public string EncodingName
         {
             get { return Encoding.EncodingName; }
-            set
-            {
-                try
-                {
-                    Encoding = Encoding.GetEncoding(value);
-                }
-                catch (Exception)
-                {
-                    // CR: Why is it ignored?
-                    // ignored
-                }
-            }
+            set { Encoding = Encoding.GetEncoding(value); }
         }
         public Encoding Encoding { get; private set; } = Encoding.Default;
         public string GetSettingsName() => "Loader";

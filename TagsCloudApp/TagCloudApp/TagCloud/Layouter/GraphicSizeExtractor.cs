@@ -28,7 +28,7 @@ namespace TagCloud.Layouter
                 .Select(h => new Font(FontFamily.GenericMonospace, h))
                 .Select(font => graphic.MeasureString(word, font))
                 .Select(s => s.ToGeometrySize())
-                .RefineError("Size extract error");
+                .RefineException("Size extract error");
         }
 
         public void Dispose()

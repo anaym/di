@@ -11,7 +11,7 @@ namespace TagCloud.Core.Extensions
     {
         public static Result<IReadOnlyDictionary<string, Rectangle>> PutManyTags(this ITagLayouter layouter, IReadOnlyDictionary<string, int> tags)
         {
-            return Result
+            return Results
                 .Of(() => tags.ToDictionary(p => p.Key, p => layouter.PutNextTag(p.Key, p.Value).GetValueOrThrow()))
                 .Cast<Dictionary<string, Rectangle>, IReadOnlyDictionary<string, Rectangle>>();
         }

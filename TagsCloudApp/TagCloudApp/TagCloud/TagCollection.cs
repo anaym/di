@@ -25,6 +25,8 @@ namespace TagCloud
 
         public IReadOnlyDictionary<string, int> GetTags() => tags.OrderByDescending(p => p.Value).ToDictionary();
 
+        public int Count => tags.Count;
+
         public void Clear() => tags.Clear();
 
         public void AddWord(string word, int count = 1)
